@@ -1,0 +1,85 @@
+/* AnalystProfile.css */
+
+/* General container styling */
+.container {
+    max-width: 70vw;
+    margin: 0 auto;
+    padding-top: 50px;
+  }
+  
+  /* Card styling for the profile */
+  .profile-card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Profile Image Styling */
+  img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Heading Styling */
+  .card-title {
+    font-size: 1.8rem;
+    color: #343a40;
+    font-weight: bold;
+  }
+  
+  /* Table Styling */
+  .profile-table th {
+    background-color: #f8f9fa;
+    color: #495057;
+    font-weight: bold;
+  }
+  
+  .profile-table td {
+    font-size: 1rem;
+    color: #495057;
+    padding: 0.75rem;
+  }
+  
+  /* Error message styling */
+  .error-message {
+    color: red;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  /* Update Profile Button */
+  button {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Responsive design for smaller screens */
+  @media (max-width: 768px) {
+    .container {
+      padding-top: 30px;
+    }
+  
+    .profile-card {
+      padding: 1.5rem;
+    }
+  
+    .card-title {
+      font-size: 1.5rem;
+    }
+  
+    .profile-table th,
+    .profile-table td {
+      font-size: 0.9rem;
+    }
+  }
+  

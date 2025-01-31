@@ -1,57 +1,78 @@
-import { Link, Routes, Route } from 'react-router-dom';
-import './App.css';
-// import WebsiteHome from './components/WebsiteHome';  
-import ErrorComp from './components/ErrorComp'; 
-import LoginComp from './components/LoginComp';  
-import RegisterComp from './components/RegisterComp';  
-import HomeComp from './components/HomeComp';  
-import ApproveAnalyst from './components/ApproveAnalyst';  
-import { useSelector } from 'react-redux';  // Corrected import for Redux
-import bullImage from './bull.jpg';
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { login } from "./components/redux/loggedSlice";
+
+// Components
+import NavbarComp from "./components/Navbar/NavbarComp";
+import ErrorComp from "./components/Utils/ErrorComp";
+import LoginComp from "./components/Home/LoginComp";
+import RegisterComp from "./components/Home/RegisterComp";
+import HomeComp from "./components/Home/HomeComp";
+import ApproveAnalyst from "./components/Admin/ApproveAnalyst";
+import Trader from "./components/Trader/Trader";
+import Analyst from "./components/Analyst/Analyst";
+import Admin from "./components/Admin/Admin";
+import Contact from "./components/Home/ContactComp";
+import UserPermissionSection from "./components/Admin/UserPermissionSection";
+import AnalystProfile from "./components/Analyst/AnalystProfile";
+import Chart from "./components/Utils/Chart";
+import TraderProfile from "./components/Trader/TraderProfile";
+import Prediction from "./components/Analyst/Prediction";
+import LogoutComp from "./components/Home/LogoutComp";
+import AboutUs from "./components/Home/AboutUs";
+import UpdateProfileComp from "./components/Utils/UpdateProfileComp";
+import { Outlet } from "react-router-dom";
 
 function App() {
-  // Accessing loggedIn state from Redux store
-  const mystate = useSelector(state => state.logged);
+  const { loggedIn } = useSelector((state) => state.logged);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const userData = localStorage.getItem("userData");
+    if (userData) {
+      dispatch(login(JSON.parse(userData)));
+    }
+  }, [dispatch]);
 
   return (
     <div>
-      <header className="App-header">
-        {/* Conditional rendering for login/register buttons based on logged state */}
-        <div style={{ display: mystate.loggedIn ? "none" : "block" }}>
-          <ul class="navbar navbar-expand-lg navbar-light bg-light">
-          <img src={bullImage} alt='Logo' />
-          <h1 className="navbar-logo"><a>Tradesphere</a></h1>
-            <li className="nav-item">
-              <Link to="/login" className="nav-link">LOGIN</Link>
-            </li>
+      {/* Conditionally show Navbar only if logged in */}
+      {!loggedIn && <NavbarComp />}
 
-            <li className="nav-item">
-              <Link to="/home" className="nav-link">HOME</Link>
-            </li>
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/" element={<HomeComp />} />
+        <Route path="/login" element={<LoginComp />} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/register" element={<RegisterComp />} />
+        <Route path="/logout" element={<LogoutComp />} />
 
-            <li className="nav-item">
-              <Link to="/login" className="nav-link">ABOUT US </Link>
-            </li>
+        {/* Protected Analyst Routes */}
+        <Route path="/analyst" element={loggedIn ? <Analyst /> : <Navigate to="/login" />}>
+          <Route path="profile" element={<AnalystProfile />} />
+          <Route path="chart" element={<Chart />} />
+          <Route path="prediction" element={<Prediction />} />
+          <Route path="updateprofile" element={<UpdateProfileComp />} />
+        </Route>
 
-            <li className="nav-item">
-              <Link to="/login" className="nav-link">CONTACT</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/register" className="nav-link">REGISTER</Link>
-            </li>
-          </ul>
-        </div>
+        {/* Protected Trader Routes */}
+        <Route path="/trader" element={loggedIn ? <Trader /> : <Navigate to="/login" />}>
+          <Route path="profile" element={<TraderProfile />} />
+          <Route path="chart" element={<Chart />} />
+          <Route path="updateprofile" element={<UpdateProfileComp />} />
+        </Route>
 
-        {/* Routes and Components */}
-        <Routes>
-          {/* <Route path="/" element={<WebsiteHome />} /> */}
-          <Route path="/login" element={<LoginComp />} />
-          <Route path="/register" element={<RegisterComp />} />
-          <Route path="/home" element={<HomeComp />} />
-          <Route path="/approve-analyst" element={<ApproveAnalyst />} />
-          <Route path="*" element={<ErrorComp />} />
-        </Routes>
-      </header>
+        {/* Protected Admin Routes */}
+        <Route path="/admin" element={loggedIn ? <Admin /> : <Navigate to="/login" />}>
+          <Route path="approveanalyst" element={<UserPermissionSection />} />
+          <Route path="approve-analyst" element={<ApproveAnalyst />} />
+        </Route>
+
+        {/* Catch-all Route */}
+        <Route path="*" element={<ErrorComp />} />
+      </Routes>
     </div>
   );
 }

@@ -1,0 +1,40 @@
+/* styles.css */
+
+.navbar {
+    background-color: #2d3e50 !important; /* Blue navbar */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  
+  .navbar-brand {
+    color: white !important; /* White text for brand */
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-link {
+    color: white !important; /* White text for nav links */
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Space between icon and text */
+    transition: color 0.3s ease; /* Smooth hover effect */
+  }
+  
+  .nav-link:hover {
+    color: #ffcc00 !important; /* Yellow on hover */
+  }
+  
+  .btn-danger {
+    background-color: #ff4d4d !important; /* Softer red for logout */
+    border: none;
+  }
+  
+  .btn-danger:hover {
+    background-color: #ff3333 !important; /* Brighter red on hover */
+  }
+  
+  h2 {
+    color: #343a40; /* Dark text */
+    font-weight: 600;
+  }
+  

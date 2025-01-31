@@ -1,8 +1,8 @@
 /* General Styles */
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f0f4f8 !important; /* Light grey-blue background with !important */
+  font-family: Arial, sans-serif;
+  background-color: #f0f4f8;
   color: #333;
   line-height: 1.6;
 }
@@ -13,16 +13,15 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  justify-content: flex-start; /* Changed to top align */
+  justify-content: flex-start;
   padding: 40px;
-  background-color: #f0f4f8 !important; /* Ensuring background color is applied */
+  background-color: #f0f4f8;
 }
 
 /* Navigation Bar Styles */
 .navbar {
-  background-color: #2d3e50 !important; /* Dark blue-grey */
+  background-color: #2d3e50;
   display: flex;
-  /* justify-content: space-between; */
   align-items: center;
   padding: 0 150px;
   gap: 45px;
@@ -32,20 +31,25 @@ body {
 }
 
 .navbar img {
-  height: 50px; /* Set the height of the image */
+  height: 50px;
   align-content: center;
   margin-left: 20px;
-  width: auto;  /* Ensure the width adjusts automatically to maintain the aspect ratio */
-  max-width: 100%; /* Prevent the image from stretching beyond its container */
-  object-fit: contain; /* Ensure the image is contained within its box without distortion */
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
 }
 
 .navbar .logo {
-  color: #f39c12; /* Warm yellow-orange */
+  color: #f39c12;
   font-size: 1.8em;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
+}
+
+.navbar-logo-img {
+  width: 50px;
+  height: 50px;
 }
 
 .navbar .nav-links {
@@ -54,7 +58,7 @@ body {
 }
 
 .navbar .nav-links a {
-  color: #ecf0f1; /* Light grey */
+  color: #ecf0f1;
   text-decoration: none;
   font-size: 1.2em;
   font-weight: 500;
@@ -62,7 +66,7 @@ body {
 }
 
 .navbar .nav-links a:hover {
-  color: #f39c12; /* Change to yellow-orange when hovered */
+  color: #f39c12;
 }
 
 /* Logo Animation */
@@ -105,9 +109,9 @@ input[type="password"],
 input[type="email"] {
   padding: 6px;
   width: 100%;
-  max-width: 300px; /* Smaller size */
+  max-width: 300px;
   border-radius: 5px;
-  border: 1px solid #bdc3c7; /* Light grey border */
+  border: 1px solid #bdc3c7;
   margin: 10px 0;
   font-size: 1em;
   background-color: #fff;
@@ -117,7 +121,7 @@ input[type="email"] {
 input[type="text"]:focus,
 input[type="password"]:focus,
 input[type="email"]:focus {
-  border-color: #3498db; /* Blue border when focused */
+  border-color: #3498db;
   outline: none;
   box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
 }
@@ -128,18 +132,17 @@ input[type="email"]:focus {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #ffffff; /* White background for form */
+  background-color: #ffffff;
   padding: 10px;
   border-radius: 8px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 400px; /* Fixed width for better layout */
+  max-width: 400px;
   margin: 30px auto;
 }
 
-
 .form-container h2 {
-  color: #2c3e50; /* Dark grey-blue */
+  color: #2c3e50;
   margin-bottom: 20px;
   font-size: 2em;
   font-weight: 600;
@@ -148,7 +151,7 @@ input[type="email"]:focus {
 /* Button Styles */
 button {
   padding: 12px 25px;
-  background-color: #3498db; /* Blue button */
+  background-color: #3498db;
   color: white;
   border: none;
   border-radius: 5px;
@@ -158,7 +161,7 @@ button {
 }
 
 button:hover {
-  background-color: #2980b9; /* Darker blue on hover */
+  background-color: #2980b9;
 }
 
 button:focus {
@@ -169,7 +172,7 @@ button:focus {
 /* Footer Styles */
 footer {
   margin-top: auto;
-  background-color: #34495e; /* Dark grey-blue footer */
+  background-color: #34495e;
   color: white;
   padding: 15px 0;
   text-align: center;
@@ -199,4 +202,119 @@ footer p {
   footer {
     font-size: 12px;
   }
+}
+
+/* Profile Sidebar Styles */
+.profile-sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: #343a40;
+  color: white;
+  transition: left 0.3s ease;
+  z-index: 1000;
+}
+
+.profile-sidebar.active {
+  left: 0;
+}
+
+.sidebar-menu {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar-menu li {
+  padding: 15px;
+  text-align: left;
+}
+
+.sidebar-menu li a {
+  color: white;
+  text-decoration: none;
+}
+
+.sidebar-menu li a:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Adjust Navbar so Profile button appears as a part of the navbar */
+.navbar .nav-item .btn {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+}
+
+/* Add this CSS to center the TradingView chart and adjust layout */
+.chart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  margin-top: 30px;
+}
+
+.tradingview-widget-container__widget {
+  width: 100%;
+  height: 100%;
+}
+
+.tradingview-widget-copyright {
+  text-align: center;
+  font-size: 12px;
+}
+
+/* Prediction Section */
+.prediction-section {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-left: 1px solid #ddd;
+  text-align: center;
+}
+
+.prediction-section input {
+  margin-bottom: 10px;
+}
+
+.profile-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 200px;
+  height: 100%;
+  background-color: #f8f9fa;
+  border-right: 1px solid #ddd;
+  display: none;
+}
+
+.profile-sidebar.active {
+  display: block;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-menu li {
+  padding: 10px;
+}
+
+.sidebar-menu li a {
+  text-decoration: none;
+  color: #333;
+}
+
+.navbar-logo {
+  font-size: 1.5em;
+  margin-right: 20px;
+}
+
+.navbar-nav .nav-link {
+  margin-right: 10px;
 }

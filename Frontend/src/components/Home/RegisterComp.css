@@ -1,0 +1,112 @@
+/* Ensure the card doesn't overlap with the navbar */
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align items at the top */
+    min-height: 100vh;
+    padding-top: 2rem; /* Adjust for navbar height */
+    padding-bottom: 2rem;
+    background-color: #f8f9fa;
+    box-sizing: border-box;
+    overflow-y: hidden; /* Prevent vertical overflow */
+}
+
+/* Style the card */
+.register-card {
+    width: 100%;
+    max-width: 30rem; /* Ensure consistent width */
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    margin: 1rem; /* Add margin for better spacing */
+}
+
+/* Form heading */
+.register-card h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    color: #343a40;
+    font-weight: bold; /* Make font bold */
+}
+
+/* Form labels */
+.register-card .form-label {
+    font-weight: bold;
+    color: #495057;
+    margin-bottom: 0.5rem; /* Add margin for better spacing */
+}
+
+/* Ensure input fields have consistent box-sizing */
+.register-card .form-control {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease; /* Add transition for better user experience */
+}
+
+/* Add consistent padding and box-sizing to select elements too */
+.register-card .form-select {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease; /* Add transition for better user experience */
+}
+
+.register-card .form-control:focus,
+.register-card .form-select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    outline: none; /* Remove default outline and use custom focus style */
+}
+
+/* Error messages */
+.register-card .text-danger {
+    font-size: 0.875rem;
+    color: #dc3545; /* Make error messages more visible */
+}
+
+/* Submit button */
+.register-card .btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Full width for button */
+    cursor: pointer; /* Add cursor for better user experience */
+}
+
+.register-card .btn-primary:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.register-card .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Adjust for responsive screens */
+@media (max-width: 768px) {
+    .register-card {
+        padding: 1.5rem;
+    }
+
+    .register-card h2 {
+        font-size: 1.5rem;
+    }
+
+    .register-card .form-select,
+    .register-card .form-control {
+        padding: 0.75rem; /* Adjust padding for smaller screens */
+    }
+}
