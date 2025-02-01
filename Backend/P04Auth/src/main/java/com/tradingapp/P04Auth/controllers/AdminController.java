@@ -1,5 +1,6 @@
 package com.tradingapp.P04Auth.controllers;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,7 @@ public class AdminController {
 			tokenToUpdate.setJwtToken(userToken.getJwtToken());
 			tokenToUpdate.setRefreshToken(userToken.getRefreshToken());
 			tokenToUpdate.setFeedToken(userToken.getFeedToken());
+			tokenToUpdate.setCreatedAt(LocalDateTime.now());
 			userTokenRepository.save(tokenToUpdate);
 		} else {
 			userTokenRepository.save(userToken);

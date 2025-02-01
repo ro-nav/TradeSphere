@@ -20,13 +20,13 @@ public class UserToken {
 	@Column(name = "client_code")
 	private String clientCode;
 
-	@Column(name = "jwt_token")
+	@Column(name = "jwt_token", columnDefinition = "TEXT")
 	private String jwtToken;
 
-	@Column(name = "refresh_token")
+	@Column(name = "refresh_token", columnDefinition = "TEXT")
 	private String refreshToken;
 
-	@Column(name = "feed_token")
+	@Column(name = "feed_token", columnDefinition = "TEXT")
 	private String feedToken;
 
 	@Column(name = "created_at")
