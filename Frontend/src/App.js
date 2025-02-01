@@ -67,7 +67,7 @@ function App() {
 
         {/* Protected Admin Routes */}
         <Route path="/LoginAPI" element={loggedIn ? <LoginPage/> : <Navigate to="/login" />}/>
-        <Route path="/admin" element={loggedIn ? <Admin /> : <Navigate to="/login" />}>
+        <Route path="/admin" element={<Admin />}>
           <Route path="approveanalyst" element={<UserPermissionSection />} />
           
           {/* <Route path="approve-analyst" element={<ApproveAnalyst />} /> */}
