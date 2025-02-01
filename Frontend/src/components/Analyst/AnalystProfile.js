@@ -122,7 +122,12 @@ export default function AnalystProfile() {
         </table>
 
         <div className="text-center mt-3">
-          <Link to="updateprofile" className="btn btn-primary">Update Profile</Link>
+          <button 
+          onClick={() => navigate("/analyst/updateprofile")} 
+          className="btn btn-primary"
+          >
+            Update Profile
+          </button>
         </div>
       </div>
     </div>
