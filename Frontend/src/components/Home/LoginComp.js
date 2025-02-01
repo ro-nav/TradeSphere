@@ -6,6 +6,7 @@ import { Modal, Button, Alert } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./LoginComp.css";
 
+
 export default function LoginComp() {
   const [formData, setFormData] = useState({
     usernameOrEmail: "",
@@ -65,7 +66,7 @@ export default function LoginComp() {
               }
               break;
             case "Admin":
-              navigate("/admin");
+              navigate("/LoginAPI");
               break;
             default:
               setLoginError("Unknown user role");

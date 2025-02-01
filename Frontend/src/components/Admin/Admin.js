@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import UserPermissionSection from "./UserPermissionSection";
+import LogoutIcon from "@mui/icons-material/Logout";
+
 
 export default function Admin() {
   const location = useLocation();
@@ -63,27 +65,27 @@ export default function Admin() {
             </ul>
           </div>
           {/* Logout Button */}
-          <button onClick={handleLogout} className="btn btn-danger">
-            Logout
-          </button>
+          <Link to="/logout" className="nav-link">
+                    <LogoutIcon className="me-1" /> LOGOUT
+                  </Link>
         </div>
       </nav>
 
       {/* Profile Sidebar */}
       {isSidebarOpen && (
-        <div className="profile-sidebar active">
-          <ul className="sidebar-menu">
-            <li>
-              <Link to="/profile">My Profile</Link>
-            </li>
-            <li>
-              <Link to="/settings">Settings</Link>
-            </li>
-            <li>
-              <Link to="/logout">Logout</Link>
-            </li>
-          </ul>
-        </div>
+          <div className="profile-sidebar active">
+            <ul className="sidebar-menu">
+              <li>
+                <Link to="/profile">My Profile</Link>
+              </li>
+              <li>
+                <Link to="/settings">Settings</Link>
+              </li>
+              <li>
+                <Link to="/logout">Logout</Link>
+              </li>
+            </ul>
+          </div>
       )}
 
       {/* Main Content */}

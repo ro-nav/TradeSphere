@@ -8,7 +8,7 @@ const UserPermissionSection = () => {
   const fetchUnapprovedAnalysts = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8084/api/admin/analysts/unapproved"
+        "http://localhost:8043/api/admin/analysts/unapproved"
       );
       if (response.ok) {
         const data = await response.json();
@@ -26,7 +26,7 @@ const UserPermissionSection = () => {
   const handleApproveAnalyst = async (analystId) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/admin/approve-analyst/${analystId}`,
+        `http://localhost:8043/api/admin/approve-analyst/${analystId}`,
         {
           method: "PUT",
         }

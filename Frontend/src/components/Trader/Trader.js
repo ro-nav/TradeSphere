@@ -2,7 +2,6 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import NavbarComp from "./Navbar/navbar";
-import StockSearch from "./StockSearch";
 
 export default function Trader() {
   const location = useLocation();
@@ -33,7 +32,6 @@ export default function Trader() {
       {/* Content */}
       <div className="text-center mt-5">
         {!showChart && <h2>Happy Trading, {username}!</h2>}
-        <StockSearch />
         <Outlet />
       </div>
     </div>
