@@ -1,5 +1,6 @@
 package com.tradingapp.P04Crud.services;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -150,6 +151,7 @@ public class UserService {
 			}
 		}
 
+		user.setUpdatedAt(LocalDateTime.now());
 		// Save the updated user to the database
 		userRepository.save(user);
 

@@ -20,8 +20,8 @@ public class SpecializationController {
 	@Autowired
 	private SpecializationService specializationService;
 
-	@GetMapping("/getAll")
-	public ResponseEntity<List<Specialization>> getAllDoctors() {
-		return ResponseEntity.ok(specializationService.getAllSpecialization());
+	@GetMapping("/getAllSpecializations")
+	public ResponseEntity<List<Specialization>> getAllSpecializations() {
+		return ResponseEntity.ok(specializationService.getAllSpecializations());
 	}
 }
