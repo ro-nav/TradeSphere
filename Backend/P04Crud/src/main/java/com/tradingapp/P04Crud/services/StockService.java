@@ -48,4 +48,12 @@ public class StockService {
 	    return "Stock LTP updated successfully";
 	}
 
+	public String removeStock(String stockSymbol) {
+        Stock stock = stockRepository.findByStockSymbol(stockSymbol)
+                .orElseThrow(() -> new NoSuchElementException("Stock with symbol '" + stockSymbol + "' not found"));
+        
+        stockRepository.delete(stock);
+        return "Stock removed successfully";
+    }
+	
 }

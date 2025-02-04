@@ -1,15 +1,14 @@
 package com.tradingapp.P04Crud.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,9 +20,9 @@ public class Trader {
 	@Column(name = "trader_id")
 	private Integer traderId;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@OneToOne()
 	@JoinColumn(name = "user_id")
-	@JsonIgnore
+	@JsonBackReference
 	private User user;
 
 	@Column(name = "bank_account_number")

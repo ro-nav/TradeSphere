@@ -2,23 +2,20 @@ package com.tradingapp.P04Crud.entities;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -30,9 +27,9 @@ public class User {
 	@Column(name = "user_id")
 	private Integer userId;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne()
 	@JoinColumn(name = "role_id")
-	@JsonBackReference
+	@JsonManagedReference
 	private Role role;
 
 	@Column(name = "username")
@@ -71,17 +68,17 @@ public class User {
 
 	@Column(name = "reset_token")
 	private String resetToken;
-	
+
 	@Column(name = "token_expiry")
 	private LocalDateTime tokenExpiry;
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonBackReference
-	private Set<Trader> Trader = new HashSet<>();
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonManagedReference
+	private Trader traders;
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonBackReference
-	private Set<Analyst> analysts = new HashSet<>();
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonManagedReference
+	private Analyst analysts;
 
 	// Enum for Status
 	public enum Status {
@@ -199,7 +196,7 @@ public class User {
 	public void setResetToken(String resetToken) {
 		this.resetToken = resetToken;
 	}
-	
+
 	public LocalDateTime getTokenExpiry() {
 		return tokenExpiry;
 	}
@@ -231,32 +228,21 @@ public class User {
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	
-	public Set<Trader> getTrader() {
-		return Trader;
+
+	public Trader getTraders() {
+		return traders;
 	}
 
-	public void setTrader(Set<Trader> trader) {
-		Trader = trader;
+	public void setTraders(Trader traders) {
+		this.traders = traders;
 	}
 
-	public Set<Analyst> getAnalysts() {
+	public Analyst getAnalysts() {
 		return analysts;
 	}
 
-	public void setAnalysts(Set<Analyst> analysts) {
+	public void setAnalysts(Analyst analysts) {
 		this.analysts = analysts;
 	}
 
-	// Convenience method to add an analyst
-	public void addAnalyst(Analyst analyst) {
-		analysts.add(analyst);
-		analyst.setUser(this);
-	}
-
-	// Convenience method to remove an analyst
-	public void removeAnalyst(Analyst analyst) {
-		analysts.remove(analyst);
-		analyst.setUser(null);
-	}
 }
