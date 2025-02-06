@@ -7,7 +7,7 @@ namespace TradeSphere.Models
     {
         public Analyst()
         {
-            Comments = new HashSet<Comment>();
+            Posts = new HashSet<Post>();
         }
 
         public int AnalystId { get; set; }
@@ -17,6 +17,6 @@ namespace TradeSphere.Models
 
         public virtual Specialization? Specialization { get; set; }
         public virtual User? User { get; set; }
-        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<Post> Posts { get; set; }
     }
 }

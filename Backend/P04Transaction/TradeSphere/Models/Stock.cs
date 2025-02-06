@@ -7,9 +7,9 @@ namespace TradeSphere.Models
     {
         public Stock()
         {
-            Comments = new HashSet<Comment>();
             Marketsentiments = new HashSet<Marketsentiment>();
             Portfolios = new HashSet<Portfolio>();
+            Posts = new HashSet<Post>();
             Transactions = new HashSet<Transaction>();
         }
 
@@ -19,9 +19,9 @@ namespace TradeSphere.Models
         public string ExchangeType { get; set; } = null!;
         public double? Ltp { get; set; }
 
-        public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Marketsentiment> Marketsentiments { get; set; }
         public virtual ICollection<Portfolio> Portfolios { get; set; }
+        public virtual ICollection<Post> Posts { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }

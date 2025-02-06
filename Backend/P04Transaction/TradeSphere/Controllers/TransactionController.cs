@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TradeSphere.Models;
+using TradeSphere.DTO;
 
 namespace TradeSphere.Controllers
 {
@@ -171,16 +172,5 @@ namespace TradeSphere.Controllers
 
             return Ok(new { UserId = userId, Transactions = transactionHistory });
         }
-
-
-    }
-
-    // Request model for Buy and Sell Transactions
-    public class TransactionRequest
-    {
-        public int UserId { get; set; }
-        public int StockId { get; set; }
-        public int Quantity { get; set; }
-        public decimal PriceAtTransaction { get; set; }
     }
 }

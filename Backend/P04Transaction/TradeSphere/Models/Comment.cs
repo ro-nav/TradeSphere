@@ -5,19 +5,13 @@ namespace TradeSphere.Models
 {
     public partial class Comment
     {
-        public Comment()
-        {
-            Ratings = new HashSet<Rating>();
-        }
-
         public int CommentId { get; set; }
-        public int StockId { get; set; }
-        public int AnalystId { get; set; }
-        public DateTime? Datetime { get; set; }
-        public string CommentText { get; set; } = null!;
+        public int PostId { get; set; }
+        public int TraderId { get; set; }
+        public string Text { get; set; } = null!;
+        public DateTime? CommentDate { get; set; }
 
-        public virtual Analyst Analyst { get; set; } = null!;
-        public virtual Stock Stock { get; set; } = null!;
-        public virtual ICollection<Rating> Ratings { get; set; }
+        public virtual Post Post { get; set; } = null!;
+        public virtual Trader Trader { get; set; } = null!;
     }
 }

@@ -17,11 +17,10 @@ namespace TradeSphere.Models
         }
 
         public virtual DbSet<Analyst> Analysts { get; set; } = null!;
-        public virtual DbSet<Auditlog> Auditlogs { get; set; } = null!;
         public virtual DbSet<Comment> Comments { get; set; } = null!;
         public virtual DbSet<Marketsentiment> Marketsentiments { get; set; } = null!;
         public virtual DbSet<Portfolio> Portfolios { get; set; } = null!;
-        public virtual DbSet<Rating> Ratings { get; set; } = null!;
+        public virtual DbSet<Post> Posts { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Specialization> Specializations { get; set; } = null!;
         public virtual DbSet<Stock> Stocks { get; set; } = null!;
@@ -76,66 +75,38 @@ namespace TradeSphere.Models
                     .HasConstraintName("analysts_ibfk_1");
             });
 
-            modelBuilder.Entity<Auditlog>(entity =>
-            {
-                entity.HasKey(e => e.LogId)
-                    .HasName("PRIMARY");
-
-                entity.ToTable("auditlogs");
-
-                entity.HasIndex(e => e.UserId, "user_id");
-
-                entity.Property(e => e.LogId).HasColumnName("log_id");
-
-                entity.Property(e => e.ActionDate)
-                    .HasColumnType("timestamp")
-                    .HasColumnName("action_date")
-                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-                entity.Property(e => e.ActionPerformed)
-                    .HasMaxLength(255)
-                    .HasColumnName("action_performed");
-
-                entity.Property(e => e.UserId).HasColumnName("user_id");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.Auditlogs)
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("auditlogs_ibfk_1");
-            });
-
             modelBuilder.Entity<Comment>(entity =>
             {
-                entity.ToTable("comments");
+                entity.ToTable("comment");
 
-                entity.HasIndex(e => e.AnalystId, "analyst_id");
+                entity.HasIndex(e => e.PostId, "FK_Comment_Post");
 
-                entity.HasIndex(e => e.StockId, "stock_id");
+                entity.HasIndex(e => e.TraderId, "FK_Comment_Trader");
 
                 entity.Property(e => e.CommentId).HasColumnName("comment_id");
 
-                entity.Property(e => e.AnalystId).HasColumnName("analyst_id");
-
-                entity.Property(e => e.CommentText)
-                    .HasColumnType("text")
-                    .HasColumnName("comment_text");
-
-                entity.Property(e => e.Datetime)
+                entity.Property(e => e.CommentDate)
                     .HasColumnType("datetime")
-                    .HasColumnName("datetime")
+                    .HasColumnName("comment_date")
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-                entity.Property(e => e.StockId).HasColumnName("stock_id");
+                entity.Property(e => e.PostId).HasColumnName("post_id");
 
-                entity.HasOne(d => d.Analyst)
-                    .WithMany(p => p.Comments)
-                    .HasForeignKey(d => d.AnalystId)
-                    .HasConstraintName("comments_ibfk_2");
+                entity.Property(e => e.Text).HasMaxLength(255);
 
-                entity.HasOne(d => d.Stock)
+                entity.Property(e => e.TraderId).HasColumnName("trader_id");
+
+                entity.HasOne(d => d.Post)
                     .WithMany(p => p.Comments)
-                    .HasForeignKey(d => d.StockId)
-                    .HasConstraintName("comments_ibfk_1");
+                    .HasForeignKey(d => d.PostId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Comment_Post");
+
+                entity.HasOne(d => d.Trader)
+                    .WithMany(p => p.Comments)
+                    .HasForeignKey(d => d.TraderId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Comment_Trader");
             });
 
             modelBuilder.Entity<Marketsentiment>(entity =>
@@ -220,29 +191,46 @@ namespace TradeSphere.Models
                     .HasConstraintName("portfolio_ibfk_1");
             });
 
-            modelBuilder.Entity<Rating>(entity =>
+            modelBuilder.Entity<Post>(entity =>
             {
-                entity.ToTable("ratings");
+                entity.ToTable("posts");
 
-                entity.HasIndex(e => e.CommentId, "comment_id");
+                entity.HasIndex(e => e.AnalystId, "analyst_id");
 
-                entity.Property(e => e.RatingId).HasColumnName("rating_id");
+                entity.HasIndex(e => e.StockId, "stock_id");
 
-                entity.Property(e => e.CommentId).HasColumnName("comment_id");
+                entity.Property(e => e.PostId).HasColumnName("post_id");
 
-                entity.Property(e => e.RatedAt)
+                entity.Property(e => e.AnalystId).HasColumnName("analyst_id");
+
+                entity.Property(e => e.Content)
+                    .HasColumnType("text")
+                    .HasColumnName("content");
+
+                entity.Property(e => e.Datetime)
                     .HasColumnType("datetime")
-                    .HasColumnName("rated_at")
+                    .HasColumnName("datetime")
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-                entity.Property(e => e.Rating1)
-                    .HasColumnType("enum('1','2','3','4','5')")
-                    .HasColumnName("rating");
+                entity.Property(e => e.Likes)
+                    .HasColumnName("likes")
+                    .HasDefaultValueSql("'0'");
 
-                entity.HasOne(d => d.Comment)
-                    .WithMany(p => p.Ratings)
-                    .HasForeignKey(d => d.CommentId)
-                    .HasConstraintName("ratings_ibfk_1");
+                entity.Property(e => e.StockId).HasColumnName("stock_id");
+
+                entity.Property(e => e.Title)
+                    .HasMaxLength(255)
+                    .HasColumnName("title");
+
+                entity.HasOne(d => d.Analyst)
+                    .WithMany(p => p.Posts)
+                    .HasForeignKey(d => d.AnalystId)
+                    .HasConstraintName("posts_ibfk_2");
+
+                entity.HasOne(d => d.Stock)
+                    .WithMany(p => p.Posts)
+                    .HasForeignKey(d => d.StockId)
+                    .HasConstraintName("posts_ibfk_1");
             });
 
             modelBuilder.Entity<Role>(entity =>

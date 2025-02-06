@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TradeSphere.Models;
+using TradeSphere.DTO;
 
 namespace TradeSphere.Controllers
 {
@@ -14,6 +15,28 @@ namespace TradeSphere.Controllers
         {
             _context = context;
         }
+
+        // GET: api/VirtualWallet/ViewBalance/{userId}
+        [HttpGet("ViewBalance/{userId}")]
+        public IActionResult ViewBalance(int userId)
+        {
+            // Check if the trader exists
+            var trader = _context.Traders.FirstOrDefault(t => t.UserId == userId);
+            if (trader == null)
+            {
+                return NotFound("Trader not found.");
+            }
+
+            // Check if wallet exists for the trader
+            var wallet = _context.VirtualWallets.FirstOrDefault(w => w.UserId == userId);
+            if (wallet == null)
+            {
+                return NotFound("Wallet for the specified trader not found.");
+            }
+
+            return Ok(new { message = "Balance retrieved successfully.", wallet.Balance });
+        }
+
 
         // POST: api/VirtualWallet/AddBalance
         [HttpPost("AddBalance")]
@@ -88,12 +111,5 @@ namespace TradeSphere.Controllers
             await _context.SaveChangesAsync();
             return Ok(new { message = "Withdrawal successful.", wallet.Balance });
         }
-    }
-
-    // Request model for AddBalance and WithdrawBalance
-    public class WalletRequest
-    {
-        public int UserId { get; set; }
-        public decimal Amount { get; set; }
     }
 }

@@ -8,7 +8,6 @@ namespace TradeSphere.Models
         public User()
         {
             Analysts = new HashSet<Analyst>();
-            Auditlogs = new HashSet<Auditlog>();
             Portfolios = new HashSet<Portfolio>();
             Transactions = new HashSet<Transaction>();
             VirtualWallets = new HashSet<VirtualWallet>();
@@ -33,7 +32,6 @@ namespace TradeSphere.Models
         public virtual Role? Role { get; set; }
         public virtual Trader? Trader { get; set; }
         public virtual ICollection<Analyst> Analysts { get; set; }
-        public virtual ICollection<Auditlog> Auditlogs { get; set; }
         public virtual ICollection<Portfolio> Portfolios { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }
         public virtual ICollection<VirtualWallet> VirtualWallets { get; set; }
