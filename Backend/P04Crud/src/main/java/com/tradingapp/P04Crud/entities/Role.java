@@ -5,7 +5,6 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,7 +25,7 @@ public class Role {
 	@Column(name = "type")
 	private String type;
 
-	@OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "role")
 	@JsonIgnore
 	private Set<User> users = new HashSet<>();
 

@@ -9,7 +9,7 @@ import ErrorComp from "./components/Utils/ErrorComp";
 import LoginComp from "./components/Home/LoginComp";
 import RegisterComp from "./components/Home/RegisterComp";
 import HomeComp from "./components/Home/HomeComp";
-import ApproveAnalyst from "./components/Admin/ApproveAnalyst";
+// import ApproveAnalyst from "./components/Admin/ApproveAnalyst";
 import Trader from "./components/Trader/Trader";
 import Analyst from "./components/Analyst/Analyst";
 import Admin from "./components/Admin/Admin";
@@ -23,6 +23,7 @@ import LogoutComp from "./components/Home/LogoutComp";
 import AboutUs from "./components/Home/AboutUs";
 import UpdateProfileComp from "./components/Utils/UpdateProfileComp";
 import { Outlet } from "react-router-dom";
+import LoginPage from "./components/Admin/LoginAPI";
 
 function App() {
   const { loggedIn } = useSelector((state) => state.logged);
@@ -65,9 +66,11 @@ function App() {
         </Route>
 
         {/* Protected Admin Routes */}
-        <Route path="/admin" element={loggedIn ? <Admin /> : <Navigate to="/login" />}>
+        <Route path="/LoginAPI" element={loggedIn ? <LoginPage/> : <Navigate to="/login" />}/>
+        <Route path="/admin" element={<Admin />}>
           <Route path="approveanalyst" element={<UserPermissionSection />} />
-          <Route path="approve-analyst" element={<ApproveAnalyst />} />
+          
+          {/* <Route path="approve-analyst" element={<ApproveAnalyst />} /> */}
         </Route>
 
         {/* Catch-all Route */}

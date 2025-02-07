@@ -14,7 +14,7 @@ public class SpecializationService {
 	@Autowired
 	private SpecializationRepository specializationRepository;
 
-	public List<Specialization> getAllSpecialization() {
+	public List<Specialization> getAllSpecializations() {
 		return specializationRepository.findAll();
 	}
 }

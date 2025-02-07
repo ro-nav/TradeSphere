@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../redux/loggedSlice";
 import { useNavigate } from "react-router-dom";
@@ -27,52 +27,48 @@ export default function LoginComp() {
     try {
       const response = await fetch("http://localhost:8042/api/user/auth/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
       if (response.ok) {
         const user = await response.json();
-        dispatch(login(user)); // Save user info to Redux or context
+        dispatch(login(user));
 
         // Show success modal
         setShowSuccessModal(true);
 
         // Store user info in sessionStorage
-        const userInfo = {
-          userid: user.userid,
-          username: user.username,
-          role: user.role,
-          approved: user.approved,
-        };
-        sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
+        sessionStorage.setItem(
+          "userInfo",
+          JSON.stringify({
+            userid: user.userid,
+            username: user.username,
+            role: user.role,
+            approved: user.approved,
+          })
+        );
 
-        // Navigate with username in state
+        // Navigate based on user role after 2 seconds
         setTimeout(() => {
           switch (user.role) {
             case "Trader":
               navigate("/trader");
               break;
             case "Analyst":
-              if (user.approved) {
-                navigate("/analyst"); // No need to pass username here if using sessionStorage
-              } else {
-                setLoginError(
-                  "Your account is not yet approved. Please contact the admin."
-                );
-              }
+              user.approved
+                ? navigate("/analyst")
+                : setLoginError("Your account is not yet approved. Please contact the admin.");
               break;
             case "Admin":
-              navigate("/admin");
+              navigate("/LoginAPI");
               break;
             default:
-              setLoginError("Unknown user role");
+              setLoginError("Unknown user role.");
           }
-        }, 2000); // Redirect after 2 seconds
+        }, 2000);
       } else if (response.status === 401) {
-        setLoginError("Incorrect username or password");
+        setLoginError("Incorrect username or password.");
       } else {
         setLoginError("Something went wrong. Please try again later.");
       }
@@ -84,8 +80,18 @@ export default function LoginComp() {
 
   const handleCloseModal = () => {
     setShowSuccessModal(false);
-    navigate("/"); // Redirect to homepage after closing the modal
+    navigate("/"); // Redirect to homepage
   };
+
+  // Automatically close the modal after 3 seconds
+  useEffect(() => {
+    if (showSuccessModal) {
+      const timer = setTimeout(() => {
+        handleCloseModal();
+      }, 1000);
+      return () => clearTimeout(timer); // Cleanup timeout
+    }
+  }, [showSuccessModal]);
 
   return (
     <div className="login-container">
@@ -123,12 +129,13 @@ export default function LoginComp() {
         )}
       </form>
 
-      <Modal show={showSuccessModal} onHide={handleCloseModal}>
+      {/* Success Modal */}
+      <Modal show={showSuccessModal} onHide={handleCloseModal} centered>
         <Modal.Header closeButton>
           <Modal.Title>Login Successful</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>You have logged in successfully!</p>
+          <p>Logged In Successfully</p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseModal}>

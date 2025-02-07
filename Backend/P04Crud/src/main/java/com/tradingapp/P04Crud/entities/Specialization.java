@@ -3,9 +3,8 @@ package com.tradingapp.P04Crud.entities;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,8 +25,8 @@ public class Specialization {
 	@Column(name = "specialization_name")
 	private String specialization;
 
-	@OneToMany(mappedBy = "specialization", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonIgnore()
+	@OneToMany(mappedBy = "specialization")
+	@JsonBackReference
 	private Set<Analyst> analysts = new HashSet<>();
 
 	public Specialization() {
