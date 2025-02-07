@@ -1,29 +1,35 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import UserPermissionSection from "./UserPermissionSection";
+import UpdateStock from "./UpdateStocksComp"; // Import UpdateStock component
 import LogoutIcon from "@mui/icons-material/Logout";
-
 
 export default function Admin() {
   const location = useLocation();
   const username = location.state?.username || "";
-  const navigate = useNavigate(); // Hook for navigation
+  const navigate = useNavigate();
 
   const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const [view, setView] = useState("dashboard"); // New state to manage views
 
-  // Toggle Sidebar
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
   };
 
-  // Handle Logout
+  const handleManageUsers = () => {
+    setView("manageUsers");
+  };
+
+  const handleUpdateStocks = () => {
+    setView("updateStocks");
+  };
+
   const handleLogout = () => {
-    navigate("/login"); // Redirect to the Login page
+    navigate("/login");
   };
 
   return (
     <div className="container">
-      {/* Navbar */}
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
@@ -43,58 +49,39 @@ export default function Admin() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <Link to="/portfolio" className="nav-link">
-                  Portfolio
-                </Link>
+                <button onClick={handleManageUsers} className="nav-link btn">
+                  Manage Users
+                </button>
               </li>
               <li className="nav-item">
-                <Link to="/about" className="nav-link">
-                  About
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/contact" className="nav-link">
-                  Contact
-                </Link>
-              </li>
-              <li className="nav-item">
-                <button onClick={toggleSidebar} className="nav-link btn">
-                  Profile
+                <button onClick={handleUpdateStocks} className="nav-link btn">
+                  Update Stocks
                 </button>
               </li>
             </ul>
           </div>
-          {/* Logout Button */}
           <Link to="/logout" className="nav-link">
-                    <LogoutIcon className="me-1" /> LOGOUT
-                  </Link>
+            <LogoutIcon className="me-1" /> LOGOUT
+          </Link>
         </div>
       </nav>
 
-      {/* Profile Sidebar */}
-      {isSidebarOpen && (
-          <div className="profile-sidebar active">
-            <ul className="sidebar-menu">
-              <li>
-                <Link to="/profile">My Profile</Link>
-              </li>
-              <li>
-                <Link to="/settings">Settings</Link>
-              </li>
-              <li>
-                <Link to="/logout">Logout</Link>
-              </li>
-            </ul>
+      <div className="mt-5">
+        {view === "dashboard" && (
+          <h2 className="text-center">Welcome, Admin {username}!</h2>
+        )}
+        {view === "manageUsers" && (
+          <div className="mt-4">
+            <h3>User Management</h3>
+            <UserPermissionSection />
           </div>
-      )}
-
-      {/* Main Content */}
-      <div className="text-center mt-5">
-        <h2>Welcome, Admin {username}!</h2>
+        )}
+        {view === "updateStocks" && (
+          <div className="mt-4">
+            <UpdateStock />
+          </div>
+        )}
       </div>
-
-      {/* User Permission Section */}
-      <UserPermissionSection />
     </div>
   );
 }

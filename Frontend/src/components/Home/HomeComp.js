@@ -1,7 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"; // Import for navigation
 import "./HomeComp.css";
 
 export default function HomeComp() {
+  const navigate = useNavigate();
+
   return (
     <div className="home-container">
       <h2 className="home-title">Welcome Home</h2>
@@ -9,10 +12,13 @@ export default function HomeComp() {
         Explore our platform to manage your trades, analyze data, and make informed decisions.
       </p>
       <div className="home-actions">
-        <button className="btn btn-primary" onClick={() => console.log("Get Started button clicked")}>
+        {/* Navigate to Login Component */}
+        <button className="btn btn-primary" onClick={() => navigate("/login")}>
           Get Started
         </button>
-        <button className="btn btn-outline-secondary" onClick={() => console.log("Learn More button clicked")}>
+        
+        {/* Navigate to Learn More or another page */}
+        <button className="btn btn-outline-secondary" onClick={() => navigate("/learn-more")}>
           Learn More
         </button>
       </div>
