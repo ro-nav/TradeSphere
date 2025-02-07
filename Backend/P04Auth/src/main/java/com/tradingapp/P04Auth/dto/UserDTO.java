@@ -5,6 +5,7 @@ public class UserDTO {
 	private String username;
 	private String email;
 	private String role;
+	private String jwtToken;
 	private boolean isApproved;
 
 	public UserDTO() {
@@ -12,20 +13,22 @@ public class UserDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserDTO(Integer userid, String username, String email, String role) {
+	public UserDTO(Integer userid, String username, String email, String role, String jwtToken) {
 		super();
 		this.userid = userid;
 		this.username = username;
 		this.email = email;
 		this.role = role;
+		this.jwtToken = jwtToken;
 	}
 
-	public UserDTO(Integer userid, String username, String email, String role, boolean isApproved) {
+	public UserDTO(Integer userid, String username, String email, String role, boolean isApproved, String jwtToken) {
 		super();
 		this.userid = userid;
 		this.username = username;
 		this.email = email;
 		this.role = role;
+		this.jwtToken = jwtToken;
 		this.isApproved = isApproved;
 	}
 
@@ -59,6 +62,14 @@ public class UserDTO {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public String getJwtToken() {
+		return jwtToken;
+	}
+
+	public void setJwtToken(String jwtToken) {
+		this.jwtToken = jwtToken;
 	}
 
 	public boolean isApproved() {
