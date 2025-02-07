@@ -18,10 +18,9 @@ export default function UpdateStock() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage(""); // Clear previous messages
+    setMessage("");
     setIsSuccess(false);
 
-    // Validate Exchange Type
     if (stockData.exchangeType !== "NSE" && stockData.exchangeType !== "BSE") {
       setMessage("Only NSE and BSE are allowed for Exchange Type.");
       setIsSuccess(false);
@@ -38,8 +37,8 @@ export default function UpdateStock() {
       if (response.ok) {
         setMessage("Stock added successfully!");
         setIsSuccess(true);
-        setStockData({ stockSymbol: "", stockToken: "", exchangeType: "", ltp: "" }); // Clear form
-      }else {
+        setStockData({ stockSymbol: "", stockToken: "", exchangeType: "", ltp: "" });
+      } else {
         setMessage("Stock already present!");
         setIsSuccess(false);
       }
@@ -52,7 +51,7 @@ export default function UpdateStock() {
 
   return (
     <div className="update-stock-container">
-      <h2 className="text-center">Update Stocks</h2>
+      <h2 className="text-center">Add Stocks</h2>
       <form onSubmit={handleSubmit} className="update-stock-form">
         <div className="mb-3">
           <label className="form-label">Stock Symbol</label>
@@ -99,12 +98,11 @@ export default function UpdateStock() {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary w-100">
+        <button type="submit" className="btn btn-primary btn-sm">
           Update Stock
         </button>
       </form>
 
-      {/* Message Section */}
       {message && (
         <div
           className={`alert mt-3 ${isSuccess ? "alert-success" : "alert-danger"}`}

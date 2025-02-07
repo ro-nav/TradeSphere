@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import UserPermissionSection from "./UserPermissionSection";
-import UpdateStock from "./UpdateStocksComp"; // Import UpdateStock component
+import UpdateStock from "./UpdateStocksComp";
+import ManageStocks from "./DeleteStockComp"; // Import ManageStocks component
 import LogoutIcon from "@mui/icons-material/Logout";
 
 export default function Admin() {
@@ -9,20 +10,7 @@ export default function Admin() {
   const username = location.state?.username || "";
   const navigate = useNavigate();
 
-  const [isSidebarOpen, setSidebarOpen] = useState(false);
-  const [view, setView] = useState("dashboard"); // New state to manage views
-
-  const toggleSidebar = () => {
-    setSidebarOpen(!isSidebarOpen);
-  };
-
-  const handleManageUsers = () => {
-    setView("manageUsers");
-  };
-
-  const handleUpdateStocks = () => {
-    setView("updateStocks");
-  };
+  const [view, setView] = useState("dashboard");
 
   const handleLogout = () => {
     navigate("/login");
@@ -35,27 +23,21 @@ export default function Admin() {
           <a className="navbar-brand" href="#">
             Tradesphere
           </a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
+          <div className="collapse navbar-collapse">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <button onClick={handleManageUsers} className="nav-link btn">
+                <button onClick={() => setView("manageUsers")} className="nav-link btn">
                   Manage Users
                 </button>
               </li>
               <li className="nav-item">
-                <button onClick={handleUpdateStocks} className="nav-link btn">
-                  Update Stocks
+                <button onClick={() => setView("updateStocks")} className="nav-link btn">
+                  Add Stocks
+                </button>
+              </li>
+              <li className="nav-item">
+                <button onClick={() => setView("deleteStocks")} className="nav-link btn">
+                  Delete Stocks
                 </button>
               </li>
             </ul>
@@ -79,6 +61,11 @@ export default function Admin() {
         {view === "updateStocks" && (
           <div className="mt-4">
             <UpdateStock />
+          </div>
+        )}
+        {view === "deleteStocks" && (
+          <div className="mt-4">
+            <ManageStocks />
           </div>
         )}
       </div>

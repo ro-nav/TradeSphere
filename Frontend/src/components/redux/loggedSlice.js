@@ -1,35 +1,51 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// Load state from localStorage
-const loadStateFromStorage = () => {
-  const savedState = localStorage.getItem("userState");
-  return savedState ? JSON.parse(savedState) : { loggedIn: false, userData: null, showNavbar: true };
+// Define the initial state
+const initialState = {
+  loggedIn: false, // Tracks if the user is logged in
+  userData: null, // Stores user information
+  showNavbar: true, // Controls the visibility of the navbar
 };
 
 // Create a slice for authentication and user state management
 const loggedSlice = createSlice({
   name: "logged",
-  initialState: loadStateFromStorage(), // Initialize with loaded state
+  initialState,
   reducers: {
+    /**
+     * Handles user login
+     * @param {Object} state - Current state
+     * @param {Object} action - Action containing user data payload
+     */
     login: (state, action) => {
-      state.loggedIn = true;
-      state.userData = action.payload;
-      state.showNavbar = false;
-      localStorage.setItem("userState", JSON.stringify(state)); // Save to localStorage
+      state.loggedIn = true; // Set logged-in status
+      state.user = action.payload; // Store user data
+      state.showNavbar = false; // Hide navbar post-login
     },
+
+    /**
+     * Handles user logout
+     * @param {Object} state - Current state
+     */
     logout: (state) => {
-      state.loggedIn = false;
-      state.userData = null;
-      state.showNavbar = true;
-      localStorage.removeItem("userState"); // Clear from localStorage
+      state.loggedIn = false; // Set logged-out status
+      state.user = null; // Clear user data
+      state.showNavbar = true; // Show navbar post-logout
     },
+
+    /**
+     * Updates user profile
+     * @param {Object} state - Current state
+     * @param {Object} action - Action containing updated profile data
+     */
     updateProfile: (state, action) => {
-      state.userData = { ...state.userData, ...action.payload };
-      localStorage.setItem("userState", JSON.stringify(state)); // Save updated state
+      state.user = { ...state.userData, ...action.payload }; // Merge updated data
     },
   },
 });
 
-// Export actions and reducer
+// Export actions for use in components
 export const { login, logout, updateProfile } = loggedSlice.actions;
+
+// Export the reducer for store configuration
 export default loggedSlice.reducer;

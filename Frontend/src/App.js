@@ -1,6 +1,6 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { login } from "./components/redux/loggedSlice";
 
 // Components
@@ -9,7 +9,6 @@ import ErrorComp from "./components/Utils/ErrorComp";
 import LoginComp from "./components/Home/LoginComp";
 import RegisterComp from "./components/Home/RegisterComp";
 import HomeComp from "./components/Home/HomeComp";
-// import ApproveAnalyst from "./components/Admin/ApproveAnalyst";
 import Trader from "./components/Trader/Trader";
 import Analyst from "./components/Analyst/Analyst";
 import Admin from "./components/Admin/Admin";
@@ -22,23 +21,29 @@ import Prediction from "./components/Analyst/Prediction";
 import LogoutComp from "./components/Home/LogoutComp";
 import AboutUs from "./components/Home/AboutUs";
 import UpdateProfileComp from "./components/Utils/UpdateProfileComp";
-import { Outlet } from "react-router-dom";
 import LoginPage from "./components/Admin/LoginAPI";
 
 function App() {
   const { loggedIn } = useSelector((state) => state.logged);
   const dispatch = useDispatch();
+  const [authChecked, setAuthChecked] = useState(false);  // New state to track auth status check
 
   useEffect(() => {
     const userData = localStorage.getItem("userData");
     if (userData) {
       dispatch(login(JSON.parse(userData)));
     }
+    setAuthChecked(true);  // Mark auth check as complete
   }, [dispatch]);
+
+  if (!authChecked) {
+    // Show a loading indicator until auth check is complete
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
-      {/* Conditionally show Navbar only if logged in */}
+      {/* Conditionally show Navbar only if user is not logged in */}
       {!loggedIn && <NavbarComp />}
 
       <Routes>
@@ -66,11 +71,9 @@ function App() {
         </Route>
 
         {/* Protected Admin Routes */}
-        <Route path="/LoginAPI" element={loggedIn ? <LoginPage/> : <Navigate to="/login" />}/>
-        <Route path="/admin" element={<Admin />}>
+        <Route path="/LoginAPI" element={loggedIn ? <LoginPage /> : <Navigate to="/login" />} />
+        <Route path="/admin" element={loggedIn ? <Admin /> : <Navigate to="/login" />}>
           <Route path="approveanalyst" element={<UserPermissionSection />} />
-          
-          {/* <Route path="approve-analyst" element={<ApproveAnalyst />} /> */}
         </Route>
 
         {/* Catch-all Route */}
