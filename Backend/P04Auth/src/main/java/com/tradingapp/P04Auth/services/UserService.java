@@ -14,8 +14,10 @@ import com.tradingapp.P04Auth.dto.LoginDTO;
 import com.tradingapp.P04Auth.dto.UserDTO;
 import com.tradingapp.P04Auth.entities.Analyst;
 import com.tradingapp.P04Auth.entities.User;
+import com.tradingapp.P04Auth.entities.UserToken;
 import com.tradingapp.P04Auth.repositories.AnalystRepository;
 import com.tradingapp.P04Auth.repositories.UserRepository;
+import com.tradingapp.P04Auth.repositories.UserTokenRepository;
 
 @Service
 public class UserService {
@@ -27,7 +29,10 @@ public class UserService {
 	private AnalystRepository analystRepository;
 
 	@Autowired
-	private JavaMailSender mailSender; // To send emails
+	UserTokenRepository userTokenRepository;
+
+	@Autowired
+	private JavaMailSender mailSender;
 
 //	@Autowired
 //	private PasswordEncoder passwordEncoder; // For encrypting passwords
@@ -46,14 +51,19 @@ public class UserService {
 			throw new Exception("Invalid credentials.");
 		}
 
+		Optional<UserToken> token = userTokenRepository.findByClientCode("AAAC496985");
+		if (token.isEmpty()) {
+			throw new Exception("Token not found.");
+		}
 		// Assuming we are just returning a success message for now (JWT can be
 		// implemented later)
 		if (user.getRole().getType().equalsIgnoreCase("Analyst")) {
 			Analyst analyst = analystRepository.findByUser(user);
 			return new UserDTO(user.getUserId(), user.getUsername(), user.getEmail(), user.getRole().getType(),
-					analyst.getIsApproved());
+					analyst.getIsApproved(), token.get().getJwtToken());
 		} else {
-			return new UserDTO(user.getUserId(), user.getUsername(), user.getEmail(), user.getRole().getType());
+			return new UserDTO(user.getUserId(), user.getUsername(), user.getEmail(), user.getRole().getType(),
+					token.get().getJwtToken());
 		}
 	}
 
