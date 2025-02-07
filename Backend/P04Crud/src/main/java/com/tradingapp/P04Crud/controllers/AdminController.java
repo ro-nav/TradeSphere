@@ -73,6 +73,21 @@ public class AdminController {
 		}
 	}
 
+	// Fetch all stocks
+	@GetMapping("/getAllStocks")
+	public ResponseEntity<?> getAllStocks() {
+		try {
+			List<Stock> stocks = stockService.getAllStocks();
+			if (stocks.isEmpty()) {
+				return ResponseEntity.status(HttpStatus.NO_CONTENT).body("No stocks available");
+			}
+			return ResponseEntity.ok(stocks);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("An error occurred while fetching stocks");
+		}
+	}
+
 	@DeleteMapping("/remove/{stockSymbol}")
 	public ResponseEntity<String> removeStock(@PathVariable String stockSymbol) {
 		try {
