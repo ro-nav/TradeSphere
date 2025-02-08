@@ -20,7 +20,7 @@ namespace TradeSphere.Controllers
         [HttpPost("CreatePost")]
         public async Task<IActionResult> CreatePost([FromBody] PostRequest request)
         {
-            var analyst = _context.Analysts.FirstOrDefault(a => a.AnalystId == request.AnalystId);
+            var analyst = _context.Analysts.FirstOrDefault(a => a.UserId == request.UserId);
             if (analyst == null) return NotFound("Analyst not found.");
 
             var stock = _context.Stocks.FirstOrDefault(s => s.StockId == request.StockId);
@@ -29,7 +29,7 @@ namespace TradeSphere.Controllers
             var post = new Post
             {
                 StockId = request.StockId,
-                AnalystId = request.AnalystId,
+                AnalystId = analyst.AnalystId,
                 Title = request.Title,
                 Content = request.Content,
                 Datetime = DateTime.Now,
