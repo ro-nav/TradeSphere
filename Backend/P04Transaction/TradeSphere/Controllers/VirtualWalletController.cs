@@ -5,7 +5,7 @@ using TradeSphere.DTO;
 
 namespace TradeSphere.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("transaction/[controller]")]
     [ApiController]
     public class VirtualWalletController : ControllerBase
     {
