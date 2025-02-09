@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tradingapp.P04Auth.entities.UserToken;
 import com.tradingapp.P04Auth.repositories.UserTokenRepository;
 
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+//@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @RestController
-@RequestMapping("/api/admin/auth")
+@RequestMapping("/auth/admin")
 public class AdminController {
 
 	@Autowired

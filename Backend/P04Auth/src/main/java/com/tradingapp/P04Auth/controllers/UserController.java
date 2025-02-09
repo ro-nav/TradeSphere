@@ -15,9 +15,9 @@ import com.tradingapp.P04Auth.dto.LoginDTO;
 import com.tradingapp.P04Auth.dto.UserDTO;
 import com.tradingapp.P04Auth.services.UserService;
 
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+//@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @RestController
-@RequestMapping("/api/user/auth")
+@RequestMapping("/auth/user")
 public class UserController {
 
 	@Autowired
