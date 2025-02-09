@@ -5,7 +5,7 @@ using TradeSphere.Models;
 
 namespace TradeSphere.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("transaction/[controller]")]
     [ApiController]
     public class PortfolioController : ControllerBase
     {

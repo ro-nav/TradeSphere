@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
+using Steeltoe.Discovery.Client;
 using TradeSphere.Models;
 
 namespace TradeSphere
@@ -27,18 +28,21 @@ namespace TradeSphere
             );
 
             // Add CORS policy to allow any origin, header, and method
-            builder.Services.AddCors(options =>
-            {
-                options.AddPolicy("AllowAll", policy =>
-                    policy.AllowAnyHeader()
-                          .AllowAnyMethod()
-                          .SetIsOriginAllowed(_ => true)
-                          .AllowCredentials());
-            });
+            //builder.Services.AddCors(options =>
+            //{
+            //    options.AddPolicy("AllowAll", policy =>
+            //        policy.AllowAnyHeader()
+            //              .AllowAnyMethod()
+            //              .SetIsOriginAllowed(_ => true)
+            //              .AllowCredentials());
+            //});
 
             // Add Swagger/OpenAPI for API documentation
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            // Add Steeltoe Discovery Client
+            builder.Services.AddDiscoveryClient(builder.Configuration);
 
             var app = builder.Build();
 
@@ -49,12 +53,15 @@ namespace TradeSphere
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             // Enable CORS using the configured policy
-            app.UseCors("AllowAll");
+            //app.UseCors("AllowAll");
 
             app.UseAuthorization();
+
+            // Use Steeltoe Discovery Client
+            //app.UseDiscoveryClient();
 
             // Map controller routes
             app.MapControllers();
