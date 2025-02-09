@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle"; // Make sure to import the icon
-
-import "./AnalystProfile.css"; // Import the CSS file for custom styles
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import "./AnalystProfile.css";
 
 export default function AnalystProfile() {
   const navigate = useNavigate();
-  const user = JSON.parse(sessionStorage.getItem("userInfo"));
+  const user = JSON.parse(localStorage.getItem("userInfo"));
   const [analyst, setAnalyst] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Check if the user is logged in
   useEffect(() => {
     if (!user) {
-      // If no user found in sessionStorage, redirect to login page
       navigate("/login");
       return;
     }
@@ -22,9 +19,9 @@ export default function AnalystProfile() {
     const fetchProfile = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/user/profile/${user.username}`,
+          `http://localhost:8040/crud/user/profile/${user.userid}`,
           {
-            credentials: "include", // Include session cookie
+            credentials: "include",
           }
         );
         if (!response.ok) {
@@ -40,7 +37,7 @@ export default function AnalystProfile() {
     };
 
     fetchProfile();
-  }, [user, navigate]); // Include user in the dependency array to trigger re-fetch if necessary
+  }, [user, navigate]);
 
   if (loading) {
     return <p>Loading profile...</p>;
@@ -59,7 +56,6 @@ export default function AnalystProfile() {
       <h2 className="text-center mb-4">Analyst Profile</h2>
       <div className="card shadow-lg p-4 profile-card">
         <div className="text-center mb-4">
-          {/* If profile picture is missing, show the icon */}
           <AccountCircleIcon
             style={{
               fontSize: "150px",
@@ -71,7 +67,6 @@ export default function AnalystProfile() {
             }}
           />
 
-          {/* Full Name */}
           <h3 className="card-title mb-2">
             {analyst.firstName && analyst.lastName
               ? `${analyst.firstName} ${analyst.lastName}`
@@ -79,7 +74,6 @@ export default function AnalystProfile() {
           </h3>
         </div>
 
-        {/* Profile Details in Tabular Format */}
         <table className="table table-bordered profile-table">
           <tbody>
             <tr>
@@ -122,7 +116,9 @@ export default function AnalystProfile() {
         </table>
 
         <div className="text-center mt-3">
-          <Link to="updateprofile" className="btn btn-primary">Update Profile</Link>
+          <Link to="/analyst/updateprofile" className="btn btn-primary">
+            Update Profile
+          </Link>
         </div>
       </div>
     </div>

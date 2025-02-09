@@ -1,0 +1,55 @@
+.trader-page {
+  font-family: "Arial", sans-serif;
+  background: linear-gradient(135deg, #1e3c72 0%, #2258b5 100%);
+  min-height: 100vh;
+  color: #333;
+}
+.navbar-nav .nav-link:hover {
+  color: #000000; /* Change text color on hover */
+
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+}
+
+.header {
+  background: linear-gradient(to bottom right, #89cff0, #1e90ff);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.profile-card {
+  /* background: linear-gradient(135deg, #f6f8f9 0%, #f7f7f8 100%); */
+  background: linear-gradient(to bottom right, #89cff0, #1e90ff);
+  color: rgb(250, 251, 251);
+  border-radius: 15px;
+}
+
+.content-card {
+  background: linear-gradient(135deg, #4fa3d4 0%, #aeaeae 100%);
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.welcome-message {
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #1e3c72 0%, #4e6998 100%);
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #224e9c 10%, #bf7dd3 100%);
+  border: none;
+}
+
+.btn-danger:hover {
+  background: linear-gradient(135deg, #ff68c8 0%, #1f48ff 100%);
+}

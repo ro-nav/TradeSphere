@@ -1,43 +1,56 @@
 .home-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 50px;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(
+    to bottom right,
+    #89cff0,
+    #1e90ff
+  ); /* Light sky blue to deep blue */
+  position: relative;
+  overflow: hidden;
 }
 
-.home-title {
-  font-size: 2.5rem;
+.gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 50, 0.4); /* Deep blue overlay for subtle contrast */
+  z-index: 1;
+}
+
+.welcome-card {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+  box-shadow: 0 8px 32px rgba(0, 0, 50, 0.2);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 20px;
+  max-width: 600px;
+  color: #e0f7fa; /* Light cyan for text */
+}
+
+.welcome-card h1 {
+  color: #2d4548; /* Bright cyan-blue for headings */
   font-weight: bold;
-  color: #007bff;
-  margin-bottom: 20px;
-  text-transform: uppercase;
 }
 
-.home-description {
-  font-size: 1.2rem;
-  color: #555;
-  margin-bottom: 30px;
-  text-align: justify;
-}
-
-.home-actions {
-  display: flex;
-  justify-content: center;
-}
-
-.home-actions .btn {
-  margin: 5px;
+.custom-btn {
+  color: white;
+  background: linear-gradient(
+    to right,
+    #1e3c72,
+    #2a5298
+  ); /* Dark blue gradient for button */
   padding: 10px 20px;
-  font-size: 1rem;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+  border-radius: 10px;
+  border: none;
+  transition: all 0.3s ease;
+  font-weight: bold;
 }
 
-.home-actions .btn:hover {
-  background-color: #007bff;
-  color: #fff;
+.custom-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 16px rgba(30, 60, 114, 0.6);
+  color: #e0f7fa;
 }

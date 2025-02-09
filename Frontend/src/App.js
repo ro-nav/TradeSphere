@@ -1,46 +1,67 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { login } from "./components/redux/loggedSlice";
 
 // Components
+import UpdateAnalystProfile from "./components/Analyst/UpdateAnalystProfile";
+import UpdateTraderProfile from "./components/Trader/UpdateTraderProfile";
 import NavbarComp from "./components/Navbar/NavbarComp";
 import ErrorComp from "./components/Utils/ErrorComp";
 import LoginComp from "./components/Home/LoginComp";
 import RegisterComp from "./components/Home/RegisterComp";
 import HomeComp from "./components/Home/HomeComp";
-// import ApproveAnalyst from "./components/Admin/ApproveAnalyst";
 import Trader from "./components/Trader/Trader";
 import Analyst from "./components/Analyst/Analyst";
 import Admin from "./components/Admin/Admin";
 import Contact from "./components/Home/ContactComp";
 import UserPermissionSection from "./components/Admin/UserPermissionSection";
-import AnalystProfile from "./components/Analyst/AnalystProfile";
-import Chart from "./components/Utils/Chart";
 import TraderProfile from "./components/Trader/TraderProfile";
-import Prediction from "./components/Analyst/Prediction";
 import LogoutComp from "./components/Home/LogoutComp";
 import AboutUs from "./components/Home/AboutUs";
-import UpdateProfileComp from "./components/Utils/UpdateProfileComp";
-import { Outlet } from "react-router-dom";
 import LoginPage from "./components/Admin/LoginAPI";
+import AddCommentComp from "./components/Analyst/AddCommentComp";
+import FinBERTSentiment from "./components/Analyst/AnalyseComp";
+import AnalystProfile from "./components/Analyst/AnalystProfileComp";
+import StockSearch from "./components/Trader/StockSearch";
+import BuyStock from "./components/Trader/BuyStock";
+import SellStock from "./components/Trader/SellStock";
+import MyPortfolio from "./components/Trader/MyPortfolio";
+import StockComments from "./components/Trader/StockComments";
+import WalletComponent from "./components/Trader/WalletComponent";
 
 function App() {
   const { loggedIn } = useSelector((state) => state.logged);
   const dispatch = useDispatch();
+  const [authChecked, setAuthChecked] = useState(false);
+  const location = useLocation(); // Track the current route
 
   useEffect(() => {
     const userData = localStorage.getItem("userData");
     if (userData) {
       dispatch(login(JSON.parse(userData)));
     }
+    setAuthChecked(true);
   }, [dispatch]);
+
+  if (!authChecked) {
+    return <div>Loading...</div>;
+  }
+
+  // Define public routes where the Navbar should be displayed
+  const publicRoutes = [
+    "/",
+    "/about",
+    "/contact",
+    "/register",
+    "/login",
+    "/logout",
+  ];
+  const showNavbar = publicRoutes.includes(location.pathname) && !loggedIn;
 
   return (
     <div>
-      {/* Conditionally show Navbar only if logged in */}
-      {!loggedIn && <NavbarComp />}
-
+      {showNavbar && <NavbarComp />}
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<HomeComp />} />
@@ -51,26 +72,29 @@ function App() {
         <Route path="/logout" element={<LogoutComp />} />
 
         {/* Protected Analyst Routes */}
-        <Route path="/analyst" element={loggedIn ? <Analyst /> : <Navigate to="/login" />}>
+        <Route path="/analyst" element={<Analyst />}>
+          <Route path="prediction" element={<FinBERTSentiment />} />
+          <Route path="makepost" element={<AddCommentComp />} />
           <Route path="profile" element={<AnalystProfile />} />
-          <Route path="chart" element={<Chart />} />
-          <Route path="prediction" element={<Prediction />} />
-          <Route path="updateprofile" element={<UpdateProfileComp />} />
+          <Route path="updateprofile" element={<UpdateAnalystProfile />} />
         </Route>
 
         {/* Protected Trader Routes */}
-        <Route path="/trader" element={loggedIn ? <Trader /> : <Navigate to="/login" />}>
+        <Route path="/trader" element={<Trader />}>
           <Route path="profile" element={<TraderProfile />} />
-          <Route path="chart" element={<Chart />} />
-          <Route path="updateprofile" element={<UpdateProfileComp />} />
+          <Route path="updateprofile" element={<UpdateTraderProfile />} />
+          <Route path="searchstock" element={<StockSearch />} />
+          <Route path="buy-stock" element={<BuyStock />} />
+          <Route path="sell-stock" element={<SellStock />} />
+          <Route path="portfolio" element={<MyPortfolio />} />
+          <Route path="viwepost" element={<StockComments />} />
+          <Route path="wallet" element={<WalletComponent />} />
         </Route>
 
         {/* Protected Admin Routes */}
-        <Route path="/LoginAPI" element={loggedIn ? <LoginPage/> : <Navigate to="/login" />}/>
+        <Route path="/LoginAPI" element={<LoginPage />} />
         <Route path="/admin" element={<Admin />}>
           <Route path="approveanalyst" element={<UserPermissionSection />} />
-          
-          {/* <Route path="approve-analyst" element={<ApproveAnalyst />} /> */}
         </Route>
 
         {/* Catch-all Route */}

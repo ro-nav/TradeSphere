@@ -3,38 +3,40 @@
   justify-content: center;
   align-items: center;
   padding: 40px 20px;
-  background-color: #f7f7f7;
+  background: linear-gradient(135deg, #6a11cb 0%, #b3c2dd 100%);
   box-sizing: border-box;
+  min-height: 100vh;
 }
 
 .about-us-content {
   max-width: 1000px;
   width: 100%;
-  background-color: white;
+  background: linear-gradient(135deg, #eb9a9a 0%, #bbc8e2 100%);
   padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
 h1 {
   text-align: center;
   font-size: 36px;
   margin-bottom: 20px;
-  color: #007bff;
+  color: #121313;
   font-weight: bold;
 }
 
 h2 {
   font-size: 28px;
   margin-top: 20px;
-  color: #333;
+  color: #000000;
   font-weight: bold;
 }
 
 .intro-text {
   font-size: 18px;
-  color: #555;
+  color: #000000;
   text-align: center;
   margin-bottom: 20px;
 }
@@ -50,7 +52,7 @@ h2 {
 
 .section p {
   font-size: 16px;
-  color: #555;
+  color: #000000;
   margin-bottom: 10px;
 }
 
@@ -61,7 +63,7 @@ ul {
 
 li {
   font-size: 16px;
-  color: #555;
+  color: #000000;
   margin-bottom: 10px;
 }
 
@@ -71,13 +73,39 @@ li {
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.3s ease-in-out;
 }
 
 .team-section p {
   font-size: 16px;
-  color: #555;
+  color: #010101;
   text-align: center;
   margin-bottom: 10px;
+}
+
+button {
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background 0.2s ease;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #ff4b2b, #ff416c);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 767px) {

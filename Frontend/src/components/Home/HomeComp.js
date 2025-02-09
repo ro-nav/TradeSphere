@@ -1,26 +1,38 @@
 import React from "react";
-import { useNavigate } from "react-router-dom"; // Import for navigation
+import { useNavigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./HomeComp.css";
 
 export default function HomeComp() {
   const navigate = useNavigate();
 
   return (
-    <div className="home-container">
-      <h2 className="home-title">Welcome Home</h2>
-      <p className="home-description">
-        Explore our platform to manage your trades, analyze data, and make informed decisions.
-      </p>
-      <div className="home-actions">
-        {/* Navigate to Login Component */}
-        <button className="btn btn-primary" onClick={() => navigate("/login")}>
-          Get Started
-        </button>
-        
-        {/* Navigate to Learn More or another page */}
-        <button className="btn btn-outline-secondary" onClick={() => navigate("/learn-more")}>
-          Learn More
-        </button>
+    <div className="container-fluid home-container d-flex align-items-center justify-content-center min-vh-100">
+      <div className="gradient-overlay"></div>
+      <div className="card welcome-card text-center text-white">
+        <div className="card-body p-5">
+          <h1 className="card-title display-4 fw-bold">
+            Welcome to TradeSphere
+          </h1>
+          <p className="card-text lead mt-3">
+            Manage your trades, analyze market trends, and make data-driven
+            decisions with ease.
+          </p>
+          <div className="mt-4">
+            <button
+              className="btn btn-primary btn-lg me-3 custom-btn"
+              onClick={() => navigate("/login")}
+            >
+              Get Started
+            </button>
+            <button
+              className="btn btn-outline-light btn-lg custom-btn"
+              onClick={() => navigate("/about")}
+            >
+              Learn More
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

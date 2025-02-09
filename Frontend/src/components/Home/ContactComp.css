@@ -1,6 +1,6 @@
 .contact-container {
   max-width: 800px;
-  margin: 80px auto; /* Spacing from navbar */
+  margin: 80px auto;
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -26,10 +26,15 @@
   align-items: center;
 }
 
+.contact-info div {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
 .contact-info h4 {
   color: #007bff;
   font-size: 1.2rem;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .contact-info p {
@@ -44,11 +49,18 @@
 
 .contact-info a:hover {
   text-decoration: underline;
+  color: #003d7e;
+}
+
+.contact-info p:hover {
+  color: #333;
+  transition: color 0.3s ease;
 }
 
 .map-container {
   margin-top: 30px;
   width: 100%;
+  overflow-x: auto;
 }
 
 .map-container .map-frame {
@@ -56,6 +68,14 @@
   height: 450px;
   border-radius: 8px;
   border: none;
+  min-width: 300px;
+}
+
+.map-error {
+  color: red;
+  font-size: 1rem;
+  text-align: center;
+  margin-top: 20px;
 }
 
 /* Responsive design for smaller screens */

@@ -1,112 +1,135 @@
-/* Ensure the card doesn't overlap with the navbar */
 .register-container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Align items at the top */
-    min-height: 100vh;
-    padding-top: 2rem; /* Adjust for navbar height */
-    padding-bottom: 2rem;
-    background-color: #f8f9fa;
-    box-sizing: border-box;
-    overflow-y: hidden; /* Prevent vertical overflow */
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(
+    to bottom right,
+    #89cff0,
+    #1e90ff
+  ); /* Light sky blue to deep blue */
+
+  padding: 20px;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Style the card */
 .register-card {
-    width: 100%;
-    max-width: 30rem; /* Ensure consistent width */
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
-    margin: 1rem; /* Add margin for better spacing */
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.6),
+    rgba(173, 216, 230, 0.6)
+  ); /* Light transparent blue */
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 50, 0.2); /* Softer shadow for depth */
+  backdrop-filter: blur(10px); /* Glassmorphism effect */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  max-width: 600px;
+  width: 100%;
+  animation: fadeIn 0.6s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
-/* Form heading */
-.register-card h2 {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    font-size: 1.8rem;
-    color: #343a40;
-    font-weight: bold; /* Make font bold */
+/* Add hover effect for interaction */
+.register-card:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(173, 216, 230, 0.7),
+    rgba(100, 149, 237, 0.7)
+  ); /* Deep sky blue blend */
+  box-shadow: 0 12px 40px rgba(0, 0, 50, 0.3);
+  transform: translateY(-5px);
 }
 
-/* Form labels */
-.register-card .form-label {
-    font-weight: bold;
-    color: #495057;
-    margin-bottom: 0.5rem; /* Add margin for better spacing */
+/* Animation for fade-in effect */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Ensure input fields have consistent box-sizing */
-.register-card .form-control {
-    width: 100%;
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease; /* Add transition for better user experience */
+h2 {
+  text-align: center;
+  color: #343a40;
+  font-weight: bold;
+  font-size: 32px;
+  margin-bottom: 20px;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Add consistent padding and box-sizing to select elements too */
-.register-card .form-select {
-    width: 100%;
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease; /* Add transition for better user experience */
+.form-label {
+  font-weight: 600;
+  color: #495057;
 }
 
-.register-card .form-control:focus,
-.register-card .form-select:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-    outline: none; /* Remove default outline and use custom focus style */
+input,
+select {
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  padding: 12px;
+  width: 100%;
+  transition: all 0.2s ease-in-out;
 }
 
-/* Error messages */
-.register-card .text-danger {
-    font-size: 0.875rem;
-    color: #dc3545; /* Make error messages more visible */
+input:focus,
+select:focus {
+  border-color: #6a11cb;
+  box-shadow: 0 0 8px rgba(106, 17, 203, 0.5);
+  outline: none;
 }
 
-/* Submit button */
-.register-card .btn-primary {
-    background-color: #007bff;
-    border: none;
-    padding: 0.75rem;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-    width: 100%; /* Full width for button */
-    cursor: pointer; /* Add cursor for better user experience */
+.text-danger {
+  font-size: 0.9rem;
+  color: #e3342f;
 }
 
-.register-card .btn-primary:disabled {
-    background-color: #6c757d;
-    cursor: not-allowed;
+button[type="submit"] {
+  background: linear-gradient(135deg, #1877a2, #949ca0);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-weight: bold;
+  border-radius: 8px;
+  width: 100%;
+  transition: background 0.2s ease-in-out;
 }
 
-.register-card .btn-primary:hover {
-    background-color: #0056b3;
+button[type="submit"]:hover {
+  background: linear-gradient(135deg, #b1387c, #ff41d3);
 }
 
-/* Adjust for responsive screens */
-@media (max-width: 768px) {
-    .register-card {
-        padding: 1.5rem;
-    }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-    .register-card h2 {
-        font-size: 1.5rem;
-    }
+@media (max-width: 767px) {
+  .register-card {
+    padding: 20px;
+  }
 
-    .register-card .form-select,
-    .register-card .form-control {
-        padding: 0.75rem; /* Adjust padding for smaller screens */
-    }
+  h2 {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .register-card {
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
 }
