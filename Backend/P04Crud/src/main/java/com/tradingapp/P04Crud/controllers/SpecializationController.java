@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tradingapp.P04Crud.entities.Specialization;
 import com.tradingapp.P04Crud.services.SpecializationService;
 
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+//@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @RestController
-@RequestMapping("/api/spec")
+@RequestMapping("/crud/spec")
 public class SpecializationController {
 
 	@Autowired

@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tradingapp.P04Crud.entities.Stock;
 import com.tradingapp.P04Crud.services.StockService;
 
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+//@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @RestController
-@RequestMapping("/api/stocks")
+@RequestMapping("/crud/stocks")
 public class StockController {
 
 	@Autowired
