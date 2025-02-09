@@ -23,9 +23,9 @@ import com.tradingapp.P04Crud.services.AnalystService;
 import com.tradingapp.P04Crud.services.StockService;
 import com.tradingapp.P04Crud.services.UserService;
 
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+//@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @RestController
-@RequestMapping("/api/admin")
+@RequestMapping("/crud/admin")
 public class AdminController {
 
 	@Autowired

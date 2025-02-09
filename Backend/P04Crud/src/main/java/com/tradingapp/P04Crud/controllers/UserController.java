@@ -16,9 +16,9 @@ import com.tradingapp.P04Crud.dto.RegistrationDTO;
 import com.tradingapp.P04Crud.dto.UpdateProfileDTO;
 import com.tradingapp.P04Crud.services.UserService;
 
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+//@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/crud/user")
 public class UserController {
 
 	@Autowired
