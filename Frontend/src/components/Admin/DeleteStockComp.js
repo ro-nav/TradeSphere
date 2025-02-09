@@ -11,7 +11,9 @@ export default function ManageStocks() {
   // Fetch stocks from the database
   const fetchStocks = async () => {
     try {
-      const response = await fetch("http://localhost:8043/api/admin/getAllStocks");
+      const response = await fetch(
+        "http://localhost:8040/crud/admin/getAllStocks"
+      );
       if (response.ok) {
         const data = await response.json();
         setStocks(data);
@@ -26,18 +28,22 @@ export default function ManageStocks() {
 
   // Handle stock deletion
   const handleDelete = async (stockSymbol) => {
-    if (!window.confirm(`Are you sure you want to delete stock ${stockSymbol}?`)) {
+    if (
+      !window.confirm(`Are you sure you want to delete stock ${stockSymbol}?`)
+    ) {
       return;
     }
 
     try {
-      const response = await fetch(`http://localhost:8043/api/admin/remove/${stockSymbol}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `http://localhost:8040/crud/admin/remove/${stockSymbol}`,
+        {
+          method: "DELETE",
+        }
+      );
 
       if (response.ok) {
         setMessage(`Stock ${stockSymbol} deleted successfully.`);
-        // Remove the deleted stock from the state
         setStocks(stocks.filter((stock) => stock.stockSymbol !== stockSymbol));
       } else {
         const errorResponse = await response.json();
@@ -51,12 +57,12 @@ export default function ManageStocks() {
 
   return (
     <div className="manage-stocks-container">
-      <h3>Manage Stocks</h3>
+      {/* <h2 className="text-center mb-4">Delete Stocks</h2> */}
       {message && <div className="alert alert-info">{message}</div>}
 
       {stocks.length > 0 ? (
-        <table className="table table-striped">
-          <thead>
+        <table className="table table-striped table-bordered">
+          <thead className="table-dark">
             <tr>
               <th>Stock Symbol</th>
               <th>Stock Token</th>
@@ -85,7 +91,7 @@ export default function ManageStocks() {
           </tbody>
         </table>
       ) : (
-        <p>No stocks available.</p>
+        <p className="text-center mt-4">No stocks available.</p>
       )}
     </div>
   );

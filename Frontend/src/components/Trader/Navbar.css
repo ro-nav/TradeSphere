@@ -1,7 +1,6 @@
 .navbar {
-  background-color: #2d3e50 !important; /* Blue navbar */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
   background: linear-gradient(to bottom right, #247195, #8ea2a9);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-brand {
@@ -23,11 +22,14 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .nav-link:hover {
-  color: #090909 !important;
+  color: #000000 !important; /* Black font on hover */
+  background: rgba(255, 255, 255, 0.3); /* Optional: Add light background */
+  border-radius: 5px;
+  padding: 8px 12px;
 }
 
 .btn-danger {

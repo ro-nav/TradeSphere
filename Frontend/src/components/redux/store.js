@@ -1,5 +1,5 @@
-import { configureStore } from '@reduxjs/toolkit';
-import loggedReducer from './loggedSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import loggedReducer from "./loggedSlice";
 
 /**
  * Configures and exports the Redux store

@@ -1,40 +1,60 @@
-/* styles.css */
-
 .navbar {
-    background-color: #2d3e50 !important; /* Blue navbar */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  }
-  
-  .navbar-brand {
-    color: white !important; /* White text for brand */
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-  }
-  
-  .nav-link {
-    color: white !important; /* White text for nav links */
-    display: flex;
-    align-items: center;
-    gap: 5px; /* Space between icon and text */
-    transition: color 0.3s ease; /* Smooth hover effect */
-  }
-  
-  .nav-link:hover {
-    color: #ffcc00 !important; /* Yellow on hover */
-  }
-  
-  .btn-danger {
-    background-color: #ff4d4d !important; /* Softer red for logout */
-    border: none;
-  }
-  
-  .btn-danger:hover {
-    background-color: #ff3333 !important; /* Brighter red on hover */
-  }
-  
-  h2 {
-    color: #343a40; /* Dark text */
-    font-weight: 600;
-  }
-  
+  background: linear-gradient(135deg, #1e3c72, #2a5298); /* Blue gradient */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Soft shadow for depth */
+  padding: 5px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1); /* Elegant bottom border */
+}
+
+.navbar-brand {
+  color: #f0f8ff !important; /* Light text for brand */
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+
+.nav-link {
+  color: #dcdde1 !important; /* Soft white for nav links */
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between icon and text */
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #181818; /* Gradient-inspired peach color */
+  transform: scale(1.05); /* Slight zoom effect */
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.5); /* Lighter border for toggle */
+}
+
+.btn-danger {
+  background: linear-gradient(
+    135deg,
+    #ff4d4d,
+    #ff3333
+  ) !important; /* Gradient red button */
+  border: none;
+  padding: 8px 15px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.btn-danger:hover {
+  background: linear-gradient(
+    135deg,
+    #ff3333,
+    #cc0000
+  ) !important; /* Darker gradient on hover */
+  box-shadow: 0 4px 12px rgba(255, 51, 51, 0.4); /* Glow effect */
+}
+
+h2 {
+  color: #ffffff;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Text shadow for a modern look */
+}

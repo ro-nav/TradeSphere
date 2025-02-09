@@ -2,10 +2,16 @@
   max-width: 400px;
   margin: 50px auto;
   padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(
+    to bottom right,
+    #d7edf7,
+    #b6c6d6
+  ); /* Light sky blue to deep blue */
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 50, 0.2); /* Softer shadow for depth */
   transition: all 0.3s ease-in-out;
+  backdrop-filter: blur(12px); /* Glassmorphism effect */
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .login-title {
@@ -13,6 +19,7 @@
   font-size: 2rem;
   margin-bottom: 20px;
   font-weight: bold;
+  color: #353838; /* Bright cyan-blue */
 }
 
 .login-form {
@@ -23,22 +30,33 @@
 
 .login-form .form-control {
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.2); /* Semi-transparent input field */
+  color: black;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.login-form .form-control:focus {
+  border-color: #00c6ff;
+  box-shadow: 0 0 8px rgba(0, 198, 255, 0.8);
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .btn-primary {
   margin-top: 10px;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
+  padding: 12px 20px;
+  background: linear-gradient(
+    to right,
+    #1e3c72,
+    #2a5298
+  ); /* Dark blue gradient */
+  color: #e0f7fa;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
   cursor: pointer;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
 }
 
 @media (max-width: 600px) {

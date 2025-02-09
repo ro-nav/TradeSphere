@@ -4,13 +4,14 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import InsightsIcon from "@mui/icons-material/Insights";
 import LogoutIcon from "@mui/icons-material/Logout";
 import "./Navbar.css";
+import SendIcon from "@mui/icons-material/Send";
 
 export default function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light shadow">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
-          Tradesphere <HomeIcon />
+        <Link className="navbar-brand" to="/analyst">
+          Tradesphere
         </Link>
         <button
           className="navbar-toggler"
@@ -26,18 +27,23 @@ export default function Navbar() {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <Link to="" className="nav-link">
+              <Link to="/analyst" className="nav-link">
                 <HomeIcon /> Home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="profile" className="nav-link">
-                <AccountCircleIcon /> Profile
               </Link>
             </li>
             <li className="nav-item">
               <Link to="prediction" className="nav-link">
                 <InsightsIcon /> Analyze
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="makepost" className="nav-link">
+                <SendIcon className="me-1" /> Post Analysis
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="profile" className="nav-link">
+                <AccountCircleIcon /> Profile
               </Link>
             </li>
           </ul>

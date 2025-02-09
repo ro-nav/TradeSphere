@@ -1,84 +1,82 @@
-/* Analyst.css */
-
 /* Ensure body covers the full viewport and prevents scrolling issues */
-body, html {
-    margin: 0;
-    padding: 0;
-    min-height: 100%;
-    font-family: "Arial", sans-serif;
-    background-color: #f4f4f4;
-  }
-  
-  /* Main container for the analyst page */
-  .analyst-page {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Full viewport height */
-  }
-  
-  /* Fixed Navbar styling */
-  nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000; /* Ensure it's above other elements */
-    background-color: #343a40; /* Bootstrap dark theme */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
-  }
-  
-  /* Prevent shifting when navigating */
-  .analyst-container {
-    flex: 1; /* Take remaining space below the navbar */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 70px; /* Adjust to match navbar height */
-  }
-  
-  /* Card Styling */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  font-family: "Arial", sans-serif;
+  background-color: #f4f4f4;
+}
+
+/* Main container for the analyst page */
+.analyst-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Full viewport height */
+}
+
+/* Fixed Navbar styling */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Ensure it's above other elements */
+  background-color: #343a40; /* Bootstrap dark theme */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+/* Prevent shifting when navigating */
+.analyst-container {
+  flex: 1; /* Take remaining space below the navbar */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 70px; /* Adjust to match navbar height */
+}
+
+/* Card Styling */
+.analyst-card {
+  max-width: 90vw;
+  width: 100%;
+  background: #ffffff; /* White background */
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2); /* Shadow effect */
+  text-align: center;
+}
+
+/* Heading */
+.analyst-heading {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #343a40; /* Bootstrap dark gray */
+  margin-bottom: 1rem;
+}
+
+/* Description */
+.analyst-description {
+  font-size: 1.1rem;
+  color: #6c757d; /* Bootstrap muted color */
+  margin-bottom: 1.5rem;
+}
+
+/* Outlet content */
+.analyst-content {
+  margin-top: 1rem;
+}
+
+/* Make the layout responsive */
+@media (max-width: 768px) {
   .analyst-card {
-    max-width: 90vw;
-    width: 100%;
-    background: #ffffff; /* White background */
-    border-radius: 10px;
-    padding: 2rem;
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2); /* Shadow effect */
-    text-align: center;
+    padding: 1.5rem;
   }
-  
-  /* Heading */
+
   .analyst-heading {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #343a40; /* Bootstrap dark gray */
-    margin-bottom: 1rem;
+    font-size: 1.5rem;
   }
-  
-  /* Description */
+
   .analyst-description {
-    font-size: 1.1rem;
-    color: #6c757d; /* Bootstrap muted color */
-    margin-bottom: 1.5rem;
+    font-size: 1rem;
   }
-  
-  /* Outlet content */
-  .analyst-content {
-    margin-top: 1rem;
-  }
-  
-  /* Make the layout responsive */
-  @media (max-width: 768px) {
-    .analyst-card {
-      padding: 1.5rem;
-    }
-  
-    .analyst-heading {
-      font-size: 1.5rem;
-    }
-  
-    .analyst-description {
-      font-size: 1rem;
-    }
-  }
-  
+}

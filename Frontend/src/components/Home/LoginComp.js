@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../redux/loggedSlice";
 import { useNavigate } from "react-router-dom";
-import { Modal, Button, Alert } from "react-bootstrap";
+import { Alert, Spinner } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./LoginComp.css";
 
@@ -12,7 +12,8 @@ export default function LoginComp() {
     password: "",
   });
   const [loginError, setLoginError] = useState("");
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // State for showing the spinner
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -23,9 +24,12 @@ export default function LoginComp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoginError("");
+    setSuccessMessage("");
+    setIsLoading(true); // Show spinner on form submit
 
     try {
-      const response = await fetch("http://localhost:8042/api/user/auth/login", {
+      const response = await fetch("http://localhost:8040/auth/user/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -35,11 +39,8 @@ export default function LoginComp() {
         const user = await response.json();
         dispatch(login(user));
 
-        // Show success modal
-        setShowSuccessModal(true);
-
-        // Store user info in sessionStorage
-        sessionStorage.setItem(
+        // Store user info and jwtToken in localStorage
+        localStorage.setItem(
           "userInfo",
           JSON.stringify({
             userid: user.userid,
@@ -48,17 +49,27 @@ export default function LoginComp() {
             approved: user.approved,
           })
         );
+        localStorage.setItem("jwtToken", user.jwtToken);
+
+        // Show success message
+        setSuccessMessage("Login successful! Redirecting...");
 
         // Navigate based on user role after 2 seconds
         setTimeout(() => {
+          setIsLoading(false); // Hide spinner before redirect
           switch (user.role) {
             case "Trader":
               navigate("/trader");
               break;
             case "Analyst":
-              user.approved
-                ? navigate("/analyst")
-                : setLoginError("Your account is not yet approved. Please contact the admin.");
+              if (user.approved) {
+                navigate("/analyst");
+              } else {
+                setSuccessMessage(""); // Clear success message
+                setLoginError(
+                  "Your account is not yet approved. Please contact the admin."
+                );
+              }
               break;
             case "Admin":
               navigate("/LoginAPI");
@@ -69,29 +80,18 @@ export default function LoginComp() {
         }, 2000);
       } else if (response.status === 401) {
         setLoginError("Incorrect username or password.");
+      } else if (response.status === 403) {
+        setLoginError("Your account is disabled. Please contact support.");
       } else {
         setLoginError("Something went wrong. Please try again later.");
       }
     } catch (error) {
       console.error("Error during login:", error);
       setLoginError("Something went wrong. Please try again later.");
+    } finally {
+      setIsLoading(false); // Hide spinner after the request is done
     }
   };
-
-  const handleCloseModal = () => {
-    setShowSuccessModal(false);
-    navigate("/"); // Redirect to homepage
-  };
-
-  // Automatically close the modal after 3 seconds
-  useEffect(() => {
-    if (showSuccessModal) {
-      const timer = setTimeout(() => {
-        handleCloseModal();
-      }, 1000);
-      return () => clearTimeout(timer); // Cleanup timeout
-    }
-  }, [showSuccessModal]);
 
   return (
     <div className="login-container">
@@ -119,30 +119,31 @@ export default function LoginComp() {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary w-100">
-          Login
+        <button
+          type="submit"
+          className="btn btn-primary w-100"
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <>
+              <Spinner animation="border" size="sm" className="me-2" />
+              Logging in...
+            </>
+          ) : (
+            "Login"
+          )}
         </button>
         {loginError && (
           <Alert variant="danger" className="mt-3">
             {loginError}
           </Alert>
         )}
+        {successMessage && (
+          <Alert variant="success" className="mt-3">
+            {successMessage}
+          </Alert>
+        )}
       </form>
-
-      {/* Success Modal */}
-      <Modal show={showSuccessModal} onHide={handleCloseModal} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Login Successful</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>Logged In Successfully</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </div>
   );
 }

@@ -1,3 +1,5 @@
+/* AnalystProfile.css */
+
 /* General container styling */
 .container {
   max-width: 70vw;
@@ -7,15 +9,10 @@
 
 /* Card styling for the profile */
 .profile-card {
-  background: linear-gradient(
-    to bottom right,
-    #7ebcf3,
-    #66afb3
-  ); /* Blue to light cyan gradient */
+  background-color: #ffffff;
   border-radius: 15px;
   padding: 2rem;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  color: white; /* Ensure text is visible on gradient */
 }
 
 /* Profile Image Styling */

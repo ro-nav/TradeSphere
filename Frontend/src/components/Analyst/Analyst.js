@@ -6,8 +6,7 @@ export default function Analyst() {
   const navigate = useNavigate();
 
   // Retrieve username from sessionStorage (or localStorage)
-  const userInfo = JSON.parse(sessionStorage.getItem("userInfo")) || {};
-
+  const userInfo = JSON.parse(localStorage.getItem("userInfo")) || {};
   const username = userInfo.username || "User"; // Default to "User" if username is not found
 
   // Optionally, handle user redirection if not logged in
@@ -17,7 +16,7 @@ export default function Analyst() {
 
   return (
     <div className="analyst-page">
-      {/* Fixed Navbar */}
+      {/* Navbar */}
       <Navbar />
 
       {/* Main Content */}
