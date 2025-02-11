@@ -51,7 +51,7 @@ namespace TradeSphere.Controllers
             if (stockId.HasValue)
                 posts = posts.Where(p => p.StockId == stockId.Value);
 
-            var result = posts.Select(p => new
+            var result = posts.OrderByDescending(p => p.Datetime).Select(p => new
             {
                 p.PostId,
                 p.Title,

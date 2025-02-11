@@ -21,6 +21,7 @@ namespace TradeSphere.Controllers
         {
             var holdings = _context.Portfolios
                 .Where(p => p.UserId == userId && p.Quantity > 0)
+                .OrderByDescending(p => p.LastUpdated)
                 .Select(p => new
                 {
                     StockId = p.StockId,
@@ -47,13 +48,12 @@ namespace TradeSphere.Controllers
         {
             var soldOutPortfolios = _context.Portfolios
                 .Where(p => p.UserId == userId && p.Status == "SoldOut")
+                .OrderByDescending(p => p.LastUpdated)
                 .Select(p => new
                 {
                     StockId = p.StockId,
                     StockSymbol = p.Stock.StockSymbol,  
-                    Quantity = p.Quantity,
                     AvgPurchasePrice = p.AvgPurchasePrice,
-                    TotalInvestment = p.TotalInvestment,
                     CumulativeProfitLoss = p.CumulativeProfitLoss,
                     Status = p.Status,
                     LastUpdated = p.LastUpdated
