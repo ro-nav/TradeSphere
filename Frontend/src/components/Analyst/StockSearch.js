@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useNavigate } from "react-router-dom";
 
 const StockSearch = () => {
   const [stocks, setStocks] = useState([]);
@@ -11,7 +10,6 @@ const StockSearch = () => {
   const [selectedStock, setSelectedStock] = useState(null);
   const [realTimeData, setRealTimeData] = useState(null);
   const token = localStorage.getItem("jwtToken");
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchStocks = async () => {
@@ -48,7 +46,7 @@ const StockSearch = () => {
       const response = await axios.post(
         "https://apiconnect.angelone.in/rest/secure/angelbroking/market/v1/quote/",
         {
-          mode: "OHLC",
+          mode: "FULL",
           exchangeTokens: {
             [stock.exchangeType]: [stock.stockToken.toString()],
           },
@@ -100,10 +98,6 @@ const StockSearch = () => {
     setFilteredStocks([]);
   };
 
-  const redirectToBuyStock = () => {
-    navigate("/trader/buy-stock", { state: { stock: realTimeData } });
-  };
-
   return (
     <div className="container mt-5">
       <h2 className="mb-4">Stock Search</h2>
@@ -144,6 +138,11 @@ const StockSearch = () => {
                   <th>High</th>
                   <th>Low</th>
                   <th>Close</th>
+                  <th>Net Change</th>
+                  <th>Percent Change</th>
+                  <th>Average Price</th>
+                  <th>52 Week Low</th>
+                  <th>52 Week High</th>
                 </tr>
               </thead>
               <tbody>
@@ -156,17 +155,16 @@ const StockSearch = () => {
                   <td>{realTimeData.high}</td>
                   <td>{realTimeData.low}</td>
                   <td>{realTimeData.close}</td>
+                  <td>{realTimeData.netChange}</td>
+                  <td>{realTimeData.percentChange}</td>
+                  <td>{realTimeData.avgPrice}</td>
+                  <td>{realTimeData["52WeekLow"]}</td>
+                  <td>{realTimeData["52WeekHigh"]}</td>
                 </tr>
               </tbody>
             </table>
           </div>
           <div className="text-center">
-            <button
-              className="btn btn-success mt-2"
-              onClick={redirectToBuyStock}
-            >
-              Buy Stock
-            </button>
             <button
               className="btn btn-danger mt-3"
               onClick={handleClearSelection}

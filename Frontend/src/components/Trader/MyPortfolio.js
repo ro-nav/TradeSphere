@@ -136,9 +136,7 @@ const MyPortfolio = () => {
             <thead>
               <tr>
                 <th>Stock Symbol</th>
-                <th>Quantity</th>
                 <th>Avg Purchase Price (₹)</th>
-                <th>Total Investment (₹)</th>
                 <th>Cumulative Profit/Loss (₹)</th>
                 <th>Status</th>
                 <th>Last Updated</th>
@@ -149,9 +147,7 @@ const MyPortfolio = () => {
                 portfolioHistory.map((history) => (
                   <tr key={history.stockId}>
                     <td>{history.stockSymbol}</td>
-                    <td>{history.quantity}</td>
                     <td>{history.avgPurchasePrice}</td>
-                    <td>{history.totalInvestment}</td>
                     <td
                       className={
                         history.cumulativeProfitLoss >= 0

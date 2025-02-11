@@ -45,9 +45,9 @@ const SellStock = () => {
     setError("");
     try {
       const response = await axios.post(
-        "http://apiconnect.angelone.in/rest/secure/angelbroking/market/v1/quote/",
+        "https://apiconnect.angelone.in/rest/secure/angelbroking/market/v1/quote/",
         {
-          mode: "OHLC",
+          mode: "LTP",
           exchangeTokens: {
             [exchangeType]: [stockToken.toString()],
           },
@@ -57,10 +57,10 @@ const SellStock = () => {
             "Content-Type": "application/json",
             "X-UserType": "USER",
             "X-SourceID": "WEB",
-            "X-ClientLocalIP": "192.168.42.210",
-            "X-ClientPublicIP": "2402:3a80:45f9:ea3a:954f:c9e2:53b1:38f9",
-            "X-MACAddress": "EC-2E-98-DE-C3-7F",
-            "X-PrivateKey": "52sQhmK0",
+            "X-ClientLocalIP": process.env.REACT_APP_LOCAL_IP,
+            "X-ClientPublicIP": process.env.REACT_APP_PUBLIC_IP,
+            "X-MACAddress": process.env.REACT_APP_MAC_ADDRESS,
+            "X-PrivateKey": process.env.REACT_APP_ANGLE_ONE_API_KEY,
             Accept: "application/json",
             Authorization: `Bearer ${token}`,
           },

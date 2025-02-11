@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 export default function UpdateAnalystProfile() {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -16,6 +18,8 @@ export default function UpdateAnalystProfile() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     fetchProfile();
@@ -92,10 +96,17 @@ export default function UpdateAnalystProfile() {
 
       if (!response.ok) throw new Error("Failed to update profile");
 
-      const result = await response.json();
+      const result = await response.text(); // Read response as plain text
       console.log("Update response:", result); // Debugging log
-      setSuccess(true); // Show success message
+
+      if (response.ok && result.includes("Profile updated")) {
+        setSuccess(true);
+        navigate("/analyst/profile");
+      } else {
+        setError("Unexpected response from server");
+      }
     } catch (error) {
+      console.error("Error:", error);
       setError(error.message);
     } finally {
       setLoading(false);

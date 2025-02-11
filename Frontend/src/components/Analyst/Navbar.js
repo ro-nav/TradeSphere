@@ -5,6 +5,13 @@ import InsightsIcon from "@mui/icons-material/Insights";
 import LogoutIcon from "@mui/icons-material/Logout";
 import "./Navbar.css";
 import SendIcon from "@mui/icons-material/Send";
+import { FaSearch } from "react-icons/fa"; // Import icons
+import { AiOutlineBarChart } from "react-icons/ai"; // Ant Design Chart Icon
+import { FaChartLine } from "react-icons/fa"; // Font Awesome Chart Icon
+import BarChartIcon from '@mui/icons-material/BarChart';
+
+
+
 
 export default function Navbar() {
   return (
@@ -32,6 +39,16 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="nav-item">
+              <Link to="chart" className="nav-link">
+                <BarChartIcon /> Chart
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="searchstock" className="nav-link">
+                <FaSearch className="me-2" /> Stock Search
+              </Link>
+            </li>
+            <li className="nav-item">
               <Link to="prediction" className="nav-link">
                 <InsightsIcon /> Analyze
               </Link>
@@ -46,12 +63,14 @@ export default function Navbar() {
                 <AccountCircleIcon /> Profile
               </Link>
             </li>
+            <li className="nav-item">
+              {/* Logout Button */}
+              <Link className="btn btn-danger" to="/logout">
+                <LogoutIcon /> Logout
+              </Link>
+            </li>
           </ul>
         </div>
-        {/* Logout Button */}
-        <Link className="btn btn-danger" to="/logout">
-          <LogoutIcon /> Logout
-        </Link>
       </div>
     </nav>
   );

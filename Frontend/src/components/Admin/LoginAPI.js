@@ -22,13 +22,13 @@ export default function LoginForm() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Accept: "application/json",
             "X-UserType": "USER",
             "X-SourceID": "WEB",
-            "X-ClientLocalIP": "192.168.1.40",
-            "X-ClientPublicIP": "2a09:bac5:3b6f:1a46::29e:101",
-            "X-MACAddress": "D8-C0-A6-23-89-83",
-            "X-PrivateKey": "52sQhmK0",
+            "X-ClientLocalIP": process.env.REACT_APP_LOCAL_IP,
+            "X-ClientPublicIP": process.env.REACT_APP_PUBLIC_IP,
+            "X-MACAddress": process.env.REACT_APP_MAC_ADDRESS,
+            "X-PrivateKey": process.env.REACT_APP_ANGLE_ONE_API_KEY,
+            Accept: "application/json",
           },
           body: JSON.stringify({ clientcode, password, totp }),
         }
@@ -88,7 +88,7 @@ export default function LoginForm() {
         }}
       >
         <h2 className="text-center mb-4" style={{ color: "#333" }}>
-          User Login
+          Admin Login
         </h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">

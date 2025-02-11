@@ -9,7 +9,7 @@ export default function AddCommentComp() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [message, setMessage] = useState(""); // For displaying success or failure message
-  const userInfo = JSON.parse(sessionStorage.getItem("userInfo")) || {};
+  const userInfo = JSON.parse(localStorage.getItem("userInfo")) || {};
   const userId = userInfo.userid;
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export default function AddCommentComp() {
         title,
         content,
       };
-
+      console.log(payload);
       await axios.post(
         "http://localhost:8040/transaction/Post/CreatePost",
         payload

@@ -24,11 +24,13 @@ import AddCommentComp from "./components/Analyst/AddCommentComp";
 import FinBERTSentiment from "./components/Analyst/AnalyseComp";
 import AnalystProfile from "./components/Analyst/AnalystProfileComp";
 import StockSearch from "./components/Trader/StockSearch";
+import AStockSearch from "./components/Analyst/StockSearch";
 import BuyStock from "./components/Trader/BuyStock";
 import SellStock from "./components/Trader/SellStock";
 import MyPortfolio from "./components/Trader/MyPortfolio";
 import StockComments from "./components/Trader/StockComments";
 import WalletComponent from "./components/Trader/WalletComponent";
+import CandlestickChart from "./components/Analyst/CandlestickChart";
 
 function App() {
   const { loggedIn } = useSelector((state) => state.logged);
@@ -73,10 +75,12 @@ function App() {
 
         {/* Protected Analyst Routes */}
         <Route path="/analyst" element={<Analyst />}>
+          <Route path="searchstock" element={<AStockSearch />} />
           <Route path="prediction" element={<FinBERTSentiment />} />
           <Route path="makepost" element={<AddCommentComp />} />
           <Route path="profile" element={<AnalystProfile />} />
           <Route path="updateprofile" element={<UpdateAnalystProfile />} />
+          <Route path="chart" element={<CandlestickChart />} />
         </Route>
 
         {/* Protected Trader Routes */}

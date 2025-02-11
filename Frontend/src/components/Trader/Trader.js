@@ -24,37 +24,17 @@ export default function Trader() {
       <Navbar />
 
       {/* Header with Gradient Background */}
-      {location.pathname === "/trader" && (
+      {/* {location.pathname === "/trader" && (
         <div className="header text-white text-center py-5">
           <h1>Welcome, {username}!</h1>
           <p>Manage your portfolio and explore trading opportunities.</p>
         </div>
-      )}
+      )} */}
 
-      <div className="container mt-4">
+      <div className="mt-4 mb-4">
         <div className="row justify-content-center">
-          {/* Profile Sidebar Card */}
-          {isSidebarOpen && (
-            <div className="col-md-4 mb-4">
-              <div className="card profile-card shadow-lg">
-                <div className="card-body">
-                  <h5 className="card-title">Profile Details</h5>
-                  <p className="card-text">
-                    <strong>Username:</strong> {username}
-                  </p>
-                  <button
-                    className="btn btn-danger w-100"
-                    onClick={handleLogout}
-                  >
-                    Logout
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-
           {/* Main Content Card */}
-          <div className={isSidebarOpen ? "col-md-8" : "col-md-12"}>
+          <div className="col-md-12">
             <div className="card content-card shadow-lg">
               <div className="card-body">
                 {location.pathname === "/trader" && (
