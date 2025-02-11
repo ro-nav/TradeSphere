@@ -26,7 +26,7 @@ public class MyBeans {
 		CorsConfiguration config = new CorsConfiguration();
 
 		config.setAllowCredentials(true);
-		config.addAllowedOrigin("http://localhost:3000"); // Use addAllowedOrigin (no duplicates)
+		config.addAllowedOrigin("http://localhost:3004"); // Use addAllowedOrigin (no duplicates)
 		config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 		config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
 		config.setExposedHeaders(Arrays.asList("Authorization"));
