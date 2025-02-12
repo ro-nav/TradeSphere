@@ -97,17 +97,27 @@ export default function RegisterComp() {
         if (value === "Select Role" || !value) error = "Please select a role";
         break;
       case "bankAccountNumber":
-        if (!value.trim()) error = "Bank account number is required";
-        else if (!/^\d{11,15}$/.test(value))
-          error = "Bank account number must be between 11 and 15 digits";
-        break;
       case "ifscCode":
-        if (!value.trim()) error = "IFSC code is required";
-        else if (!/^[A-Z]{4}\d{7}$/.test(value))
-          error = "IFSC code must be 4 letters followed by 7 digits";
+        if (formData.roleType === "Trader") {
+          if (!value.trim()) {
+            error =
+              name === "bankAccountNumber"
+                ? "Bank account number is required"
+                : "IFSC code is required";
+          } else if (
+            name === "bankAccountNumber" &&
+            !/^\d{11,15}$/.test(value)
+          ) {
+            error = "Bank account number must be between 11 and 15 digits";
+          } else if (name === "ifscCode" && !/^[A-Z]{4}\d{7}$/.test(value)) {
+            error = "IFSC code must be 4 letters followed by 7 digits";
+          }
+        }
         break;
       case "specialization":
-        if (!value.trim()) error = "Specialization is required";
+        if (formData.roleType === "Analyst" && !value.trim()) {
+          error = "Specialization is required";
+        }
         break;
       default:
         break;
@@ -141,6 +151,7 @@ export default function RegisterComp() {
     });
 
     setErrors(newErrors);
+    console.log(newErrors);
 
     // Return true if no errors
     return Object.keys(newErrors).length === 0;
@@ -150,8 +161,9 @@ export default function RegisterComp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log(formData);
     if (validate()) {
-      setLoading(true);
+      // setLoading(true);
       try {
         const response = await fetch(
           "http://localhost:8040/crud/user/register",
@@ -163,6 +175,7 @@ export default function RegisterComp() {
             body: JSON.stringify(formData),
           }
         );
+        console.log(response);
 
         if (response.ok) {
           setFormData({
@@ -181,13 +194,13 @@ export default function RegisterComp() {
           });
           navigate("/login"); // Redirect to login page
         } else {
-          const errorData = await response.json();
+          const errorData = await response.text();
           alert(errorData.message || "Registration failed. Please try again.");
         }
       } catch (err) {
         alert("An error occurred. Please try again later.");
       } finally {
-        setLoading(false);
+        // setLoading(false);
       }
     }
   };
